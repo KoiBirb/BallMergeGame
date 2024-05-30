@@ -2,7 +2,7 @@ package Balls;
 
 import javax.imageio.ImageIO;
 import java.util.Objects;
-// jfhtdgr
+
 public class Apple extends SuperBall{
 
     public Apple(int x,int y) {
