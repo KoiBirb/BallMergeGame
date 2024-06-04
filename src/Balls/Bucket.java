@@ -10,7 +10,7 @@ public class Bucket {
     Color transparentWhite = new Color(255, 255, 255, 40);
 
     public Bucket() {
-        r = new Rectangle(350, 250, 500, 550);
+        r = new Rectangle(350, 200, 500, 450);
     }
 
     public void update(){
