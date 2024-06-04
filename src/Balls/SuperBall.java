@@ -1,5 +1,6 @@
 package Balls;
 
+import Main.GamePanel;
 import hsa2.GraphicsConsole;
 import java.awt.image.BufferedImage;
 
@@ -17,9 +18,23 @@ public class SuperBall {
     }
 
     public void update() {
-        if (!isDropped && y < 600){
+        if (GamePanel.gc.getMouseButton(0) || GamePanel.gc.getMouseButton(2))
+            isDropped = true;
+
+        if (isDropped){
             // gravity
-            y += 1;
+            y += width/2;
+
+            if (y + height > 800){
+                y = 800 - height;
+            }
+        } else {
+            x = GamePanel.gc.getMouseX() - width/2;
+
+            if (x < 0)
+                x = 0;
+            else if (x + width > 600)
+                x = 600 - width;
         }
     }
 

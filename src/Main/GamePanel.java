@@ -8,11 +8,13 @@ import java.util.ArrayList;
 
 public class GamePanel {
 
-    // initialize classes
-    public GraphicsConsole gc = new GraphicsConsole(600, 800);
-    private Spawner spawner = new Spawner(gc);
-    public static ArrayList<SuperBall> balls = new ArrayList<>();
     private final int SLEEPTIME = 5;
+
+    // initialize classes
+    public static final GraphicsConsole gc = new GraphicsConsole(1200, 800);
+    private final Spawner spawner = new Spawner();
+    private final Bucket bucket = new Bucket();
+    public static ArrayList<SuperBall> fruits = new ArrayList<>();
 
     // set default settings
     public GamePanel() {
@@ -29,9 +31,11 @@ public class GamePanel {
      * Starts the game
      */
     public void start() {
-        update();
-        draw();
-        gc.sleep(SLEEPTIME);
+       while (true) {
+           update();
+           draw();
+           gc.sleep(SLEEPTIME);
+       }
     }
 
     /**
@@ -39,7 +43,8 @@ public class GamePanel {
      */
     private void update() {
         spawner.update();
-        for (SuperBall ball : balls) {
+        bucket.update();
+        for (SuperBall ball : fruits) {
             ball.update();
         }
     }
@@ -48,9 +53,15 @@ public class GamePanel {
      * Draws the game
      */
     private void draw() {
-        spawner.draw();
-        for (SuperBall ball : balls) {
-            ball.draw(gc);
+        synchronized (gc) {
+            gc.clear();
+            gc.clearRotation();
+
+            bucket.draw();
+            spawner.draw();
+            for (SuperBall ball : fruits) {
+                ball.draw(gc);
+            }
         }
     }
 }
