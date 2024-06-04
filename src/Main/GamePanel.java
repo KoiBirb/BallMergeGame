@@ -1,5 +1,6 @@
 package Main;
 
+import Ballhandlers.MergerHandler;
 import Ballhandlers.Spawner;
 import Balls.*;
 import GUI.ScoreBoard;
@@ -16,6 +17,7 @@ public class GamePanel {
     private final Spawner spawner = new Spawner();
     private final Bucket bucket = new Bucket();
     private final ScoreBoard sb = new ScoreBoard();
+    private final MergerHandler mh = new MergerHandler();
     public static ArrayList<SuperBall> fruits = new ArrayList<>();
 
     // set default settings
@@ -50,6 +52,7 @@ public class GamePanel {
         for (SuperBall ball : fruits) {
             ball.update();
         }
+        mh.merge();
     }
 
     /**
