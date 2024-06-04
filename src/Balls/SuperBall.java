@@ -2,11 +2,14 @@ package Balls;
 
 import Main.GamePanel;
 import hsa2.GraphicsConsole;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class SuperBall {
     public BufferedImage image;
     public int x, y, diameter, radius;
+    public double vx, vy;
     public boolean isDropped;
     private long lastTime = System.currentTimeMillis();
 
@@ -27,23 +30,26 @@ public class SuperBall {
 
         if (isDropped){
             // gravity
-            y += diameter /2;
+            vy += 1;
+            x += (int) vx;
+            y += (int) vy;
 
-            if (y + diameter > 650){
-                y = 650 - diameter;
-            }
-
-        } else {
+        } else
             x = GamePanel.gc.getMouseX() - diameter /2;
 
-            if (x < 350)
-                x = 350;
-            else if (x + diameter > 850)
-                x = 850 - diameter;
+        if (x < 350)
+            x = 350;
+        else if (x + diameter > 850)
+            x = 850 - diameter;
+
+        if (y + diameter > 650){
+            y = 650 - diameter;
         }
     }
 
     public void draw(GraphicsConsole gc) {
+        gc.setColor(Color.ORANGE);
+        gc.drawOval(x, y, diameter, diameter);
         gc.drawImage(image, x, y, diameter, diameter);
     }
 }

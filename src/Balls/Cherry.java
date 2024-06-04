@@ -5,8 +5,10 @@ import java.util.Objects;
 
 public class Cherry extends SuperBall {
 
+    public static final int DIAMETER = 20;
+
     public Cherry(int x, int y) {
-        super(x, y, 20);
+        super(x, y, DIAMETER);
         try {
             super.image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/Fruit/cherry.png")));
         } catch (Exception e) {
