@@ -11,7 +11,7 @@ public class GamePanel {
     private final int SLEEPTIME = 5;
 
     // initialize classes
-    public static final GraphicsConsole gc = new GraphicsConsole(1200, 800);
+    public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
     private final Spawner spawner = new Spawner();
     private final Bucket bucket = new Bucket();
     public static ArrayList<SuperBall> fruits = new ArrayList<>();
