@@ -18,7 +18,7 @@ public class Bucket {
     }
 
     public void draw() {
-        GamePanel.gc.setColor();
+        GamePanel.gc.setColor(transparentWhite);
         GamePanel.gc.fillRect(r.x, r.y, r.width, r.height);
     }
 }

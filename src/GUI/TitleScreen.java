@@ -20,38 +20,45 @@ public class TitleScreen {
         gc.setBackgroundColor(Color.decode("#eab676"));
         gc.clear();
 
-        button = new Rectangle(300,450,80,10);
+        button = new Rectangle(300, 450, 80, 10);
     }
 
     /**
      * Starts the game
      */
-    public void start() {
-        while (true) {
-            update();
+    public boolean start() {
+        while (update()) {
             draw();
             gc.sleep(SLEEPTIME);
         }
+
+        return true;
     }
 
     /**
      * Updates the game
      */
-    private void update() {
-
+    private boolean update() {
+        if (gc.getMouseClick() > 0) {    //checks if the mouse is inside the rectangle, if so it is moved diagonally
+            if (button.contains(gc.getMouseX(), gc.getMouseY())) {
+                gc.setVisible(false);
+                return false;
+            }
+        }
+        return true;
     }
 
-    /**
-     * Draws the game
-     */
-    private void draw() {
-        synchronized (gc) {
-            gc.clear();
-            gc.clearRotation();
-            gc.setColor(Color.GREEN);
-            gc.drawRect(button.x, button.y, button.width, button.height);
+        /**
+         * Draws the game
+         */
+        void draw () {
+            synchronized (gc) {
+                gc.clear();
+                gc.clearRotation();
+                gc.setColor(Color.GREEN);
+                gc.drawRect(button.x, button.y, button.width, button.height);
 
 
+            }
         }
     }
-}
