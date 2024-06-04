@@ -6,16 +6,16 @@ import java.awt.image.BufferedImage;
 
 public class SuperBall {
     public BufferedImage image;
-    public int x, y, width, height;
+    public int x, y, diameter, radius;
     public boolean isDropped;
     private long lastTime = System.currentTimeMillis();
 
 
-    public SuperBall( int x, int y, int width, int height) {
+    public SuperBall( int x, int y, int diameter) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.diameter = diameter;
+        this.radius = diameter / 2;
         this.isDropped = false;
     }
 
@@ -27,23 +27,23 @@ public class SuperBall {
 
         if (isDropped){
             // gravity
-            y += width/2;
+            y += diameter /2;
 
-            if (y + height > 800){
-                y = 800 - height;
+            if (y + diameter > 650){
+                y = 650 - diameter;
             }
 
         } else {
-            x = GamePanel.gc.getMouseX() - width/2;
+            x = GamePanel.gc.getMouseX() - diameter /2;
 
             if (x < 350)
                 x = 350;
-            else if (x + width > 850)
-                x = 850 - width;
+            else if (x + diameter > 850)
+                x = 850 - diameter;
         }
     }
 
     public void draw(GraphicsConsole gc) {
-        gc.drawImage(image, x, y, width, height);
+        gc.drawImage(image, x, y, diameter, diameter);
     }
 }
