@@ -1,5 +1,4 @@
 package GUI;
-import hsa2.GraphicsConsole;
 import java.awt.*;
 
 import Main.GamePanel;
