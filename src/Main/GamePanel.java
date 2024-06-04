@@ -2,6 +2,7 @@ package Main;
 
 import Ballhandlers.Spawner;
 import Balls.*;
+import GUI.ScoreBoard;
 import hsa2.GraphicsConsole;
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class GamePanel {
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
     private final Spawner spawner = new Spawner();
     private final Bucket bucket = new Bucket();
+    private final ScoreBoard sb = new ScoreBoard();
     public static ArrayList<SuperBall> fruits = new ArrayList<>();
 
     // set default settings
@@ -43,6 +45,7 @@ public class GamePanel {
      */
     private void update() {
         spawner.update();
+        sb.update();
         bucket.update();
         for (SuperBall ball : fruits) {
             ball.update();
@@ -58,6 +61,7 @@ public class GamePanel {
             gc.clearRotation();
 
             bucket.draw();
+            sb.draw();
             spawner.draw();
             for (SuperBall ball : fruits) {
                 ball.draw(gc);
