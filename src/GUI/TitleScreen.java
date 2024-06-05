@@ -1,11 +1,16 @@
 package GUI;
 import hsa2.GraphicsConsole;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 public class TitleScreen {
 
     private final int SLEEPTIME = 5;
     Rectangle button;
+    BufferedImage image;
 
     // initialize classes
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
@@ -20,7 +25,13 @@ public class TitleScreen {
         gc.setBackgroundColor(Color.decode("#eab676"));
         gc.clear();
 
-        button = new Rectangle(300, 450, 80, 10);
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/TitleScreen.jpg")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        button = new Rectangle(454, 425, 301, 60);
     }
 
     /**
@@ -55,6 +66,8 @@ public class TitleScreen {
             synchronized (gc) {
                 gc.clear();
                 gc.clearRotation();
+
+                gc.drawImage(image,0,0);
                 gc.setColor(Color.GREEN);
                 gc.drawRect(button.x, button.y, button.width, button.height);
 

@@ -5,8 +5,12 @@ import Ballhandlers.Spawner;
 import Balls.*;
 import GUI.ScoreBoard;
 import hsa2.GraphicsConsole;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GamePanel {
 
@@ -19,6 +23,7 @@ public class GamePanel {
     private final ScoreBoard sb = new ScoreBoard();
     private final MergerHandler mh = new MergerHandler();
     public static ArrayList<SuperBall> fruits = new ArrayList<>();
+    BufferedImage image;
 
     // set default settings
     public GamePanel() {
@@ -28,6 +33,11 @@ public class GamePanel {
         gc.enableMouse();
         gc.setTitle("Ball Drop");
         gc.setBackgroundColor(Color.decode("#eab676"));
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/GameScreen.jpg")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         gc.clear();
     }
 
@@ -62,6 +72,7 @@ public class GamePanel {
         synchronized (gc) {
             gc.clear();
             gc.clearRotation();
+            gc.drawImage(image,0,0);
 
             bucket.draw();
             sb.draw();
