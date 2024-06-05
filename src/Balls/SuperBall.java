@@ -31,19 +31,33 @@ public class SuperBall {
         if (isDropped){
             // gravity
             vy += 1;
+
+            vx *= 0.95;
+            vy *= 0.95;
+
             x += (int) vx;
             y += (int) vy;
 
         } else
             x = GamePanel.gc.getMouseX() - diameter /2;
 
-        if (x < 350)
+        if (x < 350) {
             x = 350;
-        else if (x + diameter > 850)
+            vx *= -0.90;
+        }
+        else if (x + diameter > 850) {
             x = 850 - diameter;
+            vx *= -0.90;
+        }
 
-        if (y + diameter > 650){
-            y = 650 - diameter;
+        else if (y + diameter >= 650) {
+            if (Math.abs(vy) > 4) {
+                y = 649 - diameter;
+                vy *= -0.90;
+            } else {
+                y = 650 - diameter;
+                vy = 0;
+            }
         }
     }
 
