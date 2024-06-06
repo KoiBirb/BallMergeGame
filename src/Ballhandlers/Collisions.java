@@ -8,13 +8,17 @@ import static java.lang.Math.cos;
 public class Collisions {
 
     public static boolean checkCollision (SuperBall b1, SuperBall b2) {
-        return Math.abs(Math.sqrt(pow((b2.x+b2.radius) - (b1.x + b1.radius), 2) + pow((b2.y+b2.radius) - (b1.y + b1.radius), 2))) <= Math.abs((b1.radius + b2.radius));
+        return Math.abs(distance(b1,b2)) <= Math.abs((b1.radius + b2.radius));
     }
 
     public static void handleCollisions (SuperBall b1, SuperBall b2) {
 
+        if (b1.radius > b2.radius)
+            staticCollision(b1, b2, false);
+        else
+            staticCollision(b2, b1, false);
+
         int b1x = b1.x + b1.radius;
-        int b1y = b1.y + b1.radius;
 
         int b2x = b2.x + b2.radius;
         int b2y = b2.y + b2.radius;
@@ -25,10 +29,6 @@ public class Collisions {
         if (checkCollision(b1, b2)) {
             double angle = atan2(dy, dx);
             double sin = sin(angle), cos = cos(angle);
-
-            double x1 = 0, y1 = 0;
-            double x2 = dx * cos + dy * sin;
-            double y2 = dy * cos - dx * sin;
 
             // rotate velocity
             double vx1 = b1.vx * cos + b1.vy * sin;
@@ -43,29 +43,7 @@ public class Collisions {
             vx1 = vx1final;
             vx2 = vx2final;
 
-            // fix the glitch by moving ball part equal to the overlap
-            // see video for more details(https://youtu.be/guWIF87CmBg)
-
-            double absV = abs(vx1) + abs(vx2);
-            double overlap = (b1.radius + b2.radius) - abs(x1 - x2);
-            x1 += vx1 / absV * overlap;
-            x2 += vx2 / absV * overlap;
-
-            // rotate the relative positions back
-            double x1final = x1 * cos - y1 * sin;
-            double y1final = y1 * cos + x1 * sin;
-            double x2final = x2 * cos - y2 * sin;
-            double y2final = y2 * cos + x2 * sin;
-
-
-            // finally compute the new absolute positions
-            b2.x = (int) (b1x + x2final);
-            b2.y = (int) (b1y + y2final);
-
-            b1.x = (int) (b1x + x1final);
-            b1.y = (int) (b1y + y1final);
-
-            //rotate vel back
+//            //rotate vel back
             b1.vx = vx1 * cos - vy1 * sin;
             b1.vy = vy1 * cos + vx1 * sin;
             b2.vx = vx2 * cos - vy2 * sin;
@@ -73,4 +51,29 @@ public class Collisions {
 
         }
     }
+
+    public static void staticCollision(SuperBall b1, SuperBall b2, boolean emergency) {
+        double overlap = b1.radius + b2.radius - distance(b1, b2);
+
+        SuperBall smallerObject = b2;
+        SuperBall biggerObject = b1;
+
+        if (emergency) {
+            biggerObject = b2;
+            smallerObject = b1;
+        }
+
+        double theta = Math.atan2((biggerObject.y - smallerObject.y), (biggerObject.x - smallerObject.x));
+        smallerObject.x -= (int) round(overlap * Math.cos(theta));
+        smallerObject.y -= (int) round(overlap * Math.sin(theta));
+
+        if (distance(biggerObject, smallerObject) < (biggerObject.radius + smallerObject.radius)-5) {
+            if (!emergency) staticCollision(biggerObject, smallerObject, true);
+        }
+    }
+
+    public static double distance (SuperBall b1, SuperBall b2){
+        return Math.sqrt(pow((b2.x+b2.radius) - (b1.x + b1.radius), 2) + pow((b2.y+b2.radius) - (b1.y + b1.radius), 2));
+    }
+
 }
