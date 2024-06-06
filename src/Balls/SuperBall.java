@@ -11,7 +11,7 @@ public class SuperBall {
     public BufferedImage image;
     public int x, y, diameter, radius;
     public double vx, vy, weight;
-    public boolean isDropped;
+    public boolean isDropped, touchingWall;
     private long lastTime = System.currentTimeMillis();
 
 
@@ -20,8 +20,9 @@ public class SuperBall {
         this.y = y;
         this.diameter = diameter;
         this.radius = diameter / 2;
-        weight = diameter / 100.0;
+        this.weight = diameter / 100.0;
         this.isDropped = false;
+        this.touchingWall = false;
     }
 
     public void update() {
@@ -47,8 +48,6 @@ public class SuperBall {
     }
 
     public void draw(GraphicsConsole gc) {
-        gc.setColor(Color.ORANGE);
-        gc.drawOval(x, y, diameter, diameter);
         gc.drawImage(image, x, y, diameter, diameter);
     }
 }

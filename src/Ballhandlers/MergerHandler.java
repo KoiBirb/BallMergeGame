@@ -3,8 +3,6 @@ package Ballhandlers;
 import Balls.*;
 import Main.GamePanel;
 
-import static Ballhandlers.Collisions.staticCollision;
-
 public class MergerHandler {
 
     /**

@@ -12,10 +12,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class GamePanel implements Runnable{
+public class GamePanel {
 
-    private final int FPS = 60;
-    Thread t;
+    private final int SLEEPTIME = 5;
 
     // initialize classes
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
@@ -46,8 +45,11 @@ public class GamePanel implements Runnable{
      * Starts the game
      */
     public void start() {
-        t = new Thread(this);
-        t.start();
+       while (true) {
+           update();
+           draw();
+           gc.sleep(SLEEPTIME);
+       }
     }
 
     /**
@@ -77,38 +79,6 @@ public class GamePanel implements Runnable{
             spawner.draw();
             for (SuperBall ball : fruits) {
                 ball.draw(gc);
-            }
-        }
-    }
-
-    @Override
-    public void run() {
-// Delta method FPS clock
-        double drawInterval = 1000000000.0/FPS;
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currentTime;
-        long timer = 0;
-        int drawCount = 0;
-
-        while (t != null) {
-
-            currentTime = System.nanoTime();
-
-            delta += (currentTime - lastTime) / drawInterval;
-            timer += (currentTime - lastTime);
-            lastTime = currentTime;
-
-            if(delta >= 1) {
-                update();
-                draw();
-                delta--;
-                drawCount++;
-            }
-            if(timer>= 1000000000) {
-                System.out.println("FPS:" + drawCount);
-                drawCount = 0;
-                timer = 0;
             }
         }
     }
