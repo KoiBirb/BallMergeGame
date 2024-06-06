@@ -3,6 +3,8 @@ package Ballhandlers;
 import Balls.*;
 import Main.GamePanel;
 
+import static Ballhandlers.Collisions.staticCollision;
+
 public class MergerHandler {
 
     /**
@@ -45,35 +47,35 @@ public class MergerHandler {
 
 
         switch (diameter){
-            case 20:
+            case Cherry.DIAMETER:
                 x = x - Strawberry.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Strawberry.DIAMETER > 850) ? 850 - Strawberry.DIAMETER : x;
                 return new Strawberry(x, y);
-            case 40:
+            case Strawberry.DIAMETER:
                 x = x - Grape.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Grape.DIAMETER > 850) ? 850 - Grape.DIAMETER : x;
                 return new Grape(x, y);
-            case 60:
+            case Grape.DIAMETER:
                 x = x - Lemon.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Lemon.DIAMETER > 850) ? 850 - Lemon.DIAMETER : x;
                 return new Lemon(x, y);
-            case 80:
+            case Lemon.DIAMETER:
                 x = x - Orange.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Orange.DIAMETER > 850) ? 850 - Orange.DIAMETER : x;
                 return new Orange(x, y);
-            case 120:
+            case Orange.DIAMETER:
                 x = x - Apple.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Apple.DIAMETER > 850) ? 850 - Apple.DIAMETER : x;
                 return new Apple(x, y);
-            case 160:
+            case Apple.DIAMETER:
                 x = x - Pear.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Pear.DIAMETER > 850) ? 850 - Pear.DIAMETER : x;
                 return new Pear(x, y);
-            case 200:
+            case Pear.DIAMETER:
                 x = x - Watermelon.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Watermelon.DIAMETER > 850) ? 850 - Watermelon.DIAMETER : x;
                 return new Watermelon(x, y);
-            case 240:
+            case Watermelon.DIAMETER:
                 return null;
         }
         return null;
