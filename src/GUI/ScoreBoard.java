@@ -10,7 +10,7 @@ public class ScoreBoard {
     int score = 0;
     String scoreDisplay = String.valueOf(score);
     Font font = new Font("Arial", Font.PLAIN, 12);
-    FontMetrics metrics = g.getFontMetrics(font);
+//    FontMetrics metrics = g.getFontMetrics(font);
    
     public ScoreBoard() {
         r = new Rectangle(100, 200, 100,200);
