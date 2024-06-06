@@ -1,6 +1,7 @@
 package Ballhandlers;
 
 import Balls.SuperBall;
+import Main.GamePanel;
 
 import static java.lang.Math.*;
 import static java.lang.Math.cos;
@@ -89,6 +90,11 @@ public class Collisions {
         else if (b.y + b.diameter >= 650) {
             b.y = 650 - b.diameter;
             b.vy = 0;
+            for (SuperBall ball : GamePanel.fruits) {
+                if (ball.isDropped && checkCollision(b, ball) && ball != b) {
+                    staticCollision(b, ball, false);
+                }
+            }
         }
     }
 }
