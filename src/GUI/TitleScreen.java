@@ -11,9 +11,9 @@ public class TitleScreen {
     //variables and class initializing
     private final int SLEEPTIME = 5;
     Rectangle button, help;
-    BufferedImage image;
+    BufferedImage image, image2;
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
-    Color string = new Color (160, 82, 45, 50); //transparent color for buttons
+   // Color string = new Color (160, 82, 45); //transparent color for buttons
 
     // set default settings
     public TitleScreen() {
@@ -25,8 +25,14 @@ public class TitleScreen {
         gc.setBackgroundColor(Color.decode("#eab676")); //incase the image doesnt work
         gc.clear();
 
-        try { //import image
+        try { //import image title screen
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/TitleScreen.jpg")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try { //import image title screen + info
+            image2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/TitleScreenInfo.jpg")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,14 +76,13 @@ public class TitleScreen {
                 gc.clearRotation();
 
                 gc.drawImage(image,0,0);
-                //gc.setColor(buttons);
-                //gc.drawRect(button.x, button.y, button.width, button.height);
-                //gc.drawRect(help.x, help.y, help.width, help.height);
 
                 if (help.contains(gc.getMouseX(), gc.getMouseY())) {    //check if mouse hovers over help
                     gc.setColor(Color.WHITE);
-                   // gc.fillRect(760, 370, 300, 175);
 
+                    gc.drawImage(image2,0,0); //display help
+
+                    /*
                     Polygon info = new Polygon(); //thought bubble for text
                     info.addPoint(760, 370); //1
                     info.addPoint(1075, 370); //2
@@ -89,9 +94,9 @@ public class TitleScreen {
 
                     //draw string
                     gc.setColor(string);
-                    gc.setFont( new Font( "Serif", Font.BOLD, 18) );
-                    gc.drawString("String 1", 765,380);
-
+                    gc.setFont( new Font( "Sans Serif", Font.BOLD, 18) );
+                    gc.drawString("instructions", 765,380);
+                    */
                 }
 
             }
