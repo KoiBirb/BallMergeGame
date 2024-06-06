@@ -76,4 +76,19 @@ public class Collisions {
         return Math.sqrt(pow((b2.x+b2.radius) - (b1.x + b1.radius), 2) + pow((b2.y+b2.radius) - (b1.y + b1.radius), 2));
     }
 
+    public static void wallCollisions (SuperBall b) {
+        if (b.x < 350) {
+            b.x = 350;
+            b.vx *= -0.90;
+        }
+        else if (b.x + b.diameter > 850) {
+            b.x = 850 - b.diameter;
+            b.vx *= -0.90;
+        }
+
+        else if (b.y + b.diameter >= 650) {
+            b.y = 650 - b.diameter;
+            b.vy = 0;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package Balls;
 
+import Ballhandlers.Collisions;
 import Main.GamePanel;
 import hsa2.GraphicsConsole;
 
@@ -9,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class SuperBall {
     public BufferedImage image;
     public int x, y, diameter, radius;
-    public double vx, vy;
+    public double vx, vy, weight;
     public boolean isDropped;
     private long lastTime = System.currentTimeMillis();
 
@@ -19,6 +20,7 @@ public class SuperBall {
         this.y = y;
         this.diameter = diameter;
         this.radius = diameter / 2;
+        weight = diameter / 100.0;
         this.isDropped = false;
     }
 
@@ -41,24 +43,7 @@ public class SuperBall {
         } else
             x = GamePanel.gc.getMouseX() - diameter /2;
 
-        if (x < 350) {
-            x = 350;
-            vx *= -0.90;
-        }
-        else if (x + diameter > 850) {
-            x = 850 - diameter;
-            vx *= -0.90;
-        }
-
-        else if (y + diameter >= 650) {
-            if (Math.abs(vy) > 4) {
-                y = 649 - diameter;
-                vy *= -0.90;
-            } else {
-                y = 650 - diameter;
-                vy = 0;
-            }
-        }
+        Collisions.wallCollisions(this);
     }
 
     public void draw(GraphicsConsole gc) {

@@ -3,15 +3,17 @@ import java.awt.*;
 import java.awt.FontMetrics;
 import Main.GamePanel;
 
-public class ScoreBoard extends FontMetrics{
+public class ScoreBoard{
 
     Rectangle r;
     Color transparentWhite = new Color(255, 255, 255, 40);
     int score = 0;
     String scoreDisplay = String.valueOf(score);
+    Font font = new Font("Arial", Font.BOLD, 40);
+    FontMetrics fm = GamePanel.gc.getFontMetrics(font);
    
     public ScoreBoard() {
-        super(new Font("Arial", Font.BOLD, 40));
+        super();
         r = new Rectangle(25, 200, 300,400);
     }
 
@@ -22,7 +24,7 @@ public class ScoreBoard extends FontMetrics{
         GamePanel.gc.setColor(transparentWhite);
         GamePanel.gc.fillOval(100, 40, 150, 150);
         GamePanel.gc.setFont (font);
-        GamePanel.gc.drawString(scoreDisplay, 50 - (stringWidth(scoreDisplay))/2, 100);
+        GamePanel.gc.drawString(scoreDisplay, 50 - (fm.stringWidth(scoreDisplay))/2, 100);
 
 
     }
