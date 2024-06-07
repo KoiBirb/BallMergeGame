@@ -24,7 +24,6 @@ public class Bucket {
 
         GamePanel.gc.setColor(bucketBackground);
         GamePanel.gc.fillRect((r.x+20), (r.y -25), r.width-40, r.height+20); //back panel
-
         GamePanel.gc.fillRect(r.x, r.y, r.width, r.height); //front MAIN bucket panel
 
         GamePanel.gc.setColor(bucketOutline);
