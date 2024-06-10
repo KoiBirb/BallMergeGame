@@ -14,12 +14,12 @@ public class Sort {
         return merge(left, right);
     }
 
-    public static int[] merge (int[] left, int[] right){
+    private static int[] merge (int[] left, int[] right){
         int[] temp = new int[left.length + right.length];
         int leftCounter = 0, rightCounter = 0, currentValue = 0;
 
         while (leftCounter < left.length && rightCounter < right.length){
-            if (left[leftCounter] < right[rightCounter]){
+            if (left[leftCounter] > right[rightCounter]){
                 temp[currentValue] = left[leftCounter];
                 leftCounter++;
             } else {

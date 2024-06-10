@@ -1,6 +1,7 @@
 package Ballhandlers;
 
 import Balls.SuperBall;
+import Main.GamePanel;
 
 import static java.lang.Math.*;
 import static java.lang.Math.cos;
@@ -70,10 +71,6 @@ public class Collisions {
         double theta = Math.atan2((biggerObject.y - smallerObject.y), (biggerObject.x - smallerObject.x));
         smallerObject.x -= (int) round(overlap * Math.cos(theta));
         smallerObject.y -= (int) round(overlap * Math.sin(theta));
-
-        if (distance(biggerObject, smallerObject) < (biggerObject.radius + smallerObject.radius)-5) {
-            if (!emergency) staticCollision(biggerObject, smallerObject, true);
-        }
     }
 
     public static double distance (SuperBall b1, SuperBall b2){
@@ -81,17 +78,32 @@ public class Collisions {
     }
 
     public static void wallCollisions (SuperBall b) {
+        boolean collide = false;
         if (b.x < 350) {
             b.x = 350;
             b.vx *= -0.90;
+            collide = true;
         }
         else if (b.x + b.diameter > 850) {
             b.x = 850 - b.diameter;
             b.vx *= -0.90;
+            collide = true;
         }
         if (b.y + b.diameter >= 650) {
             b.y = 650 - b.diameter;
             b.vy = 0;
+            collide = true;
+        }
+        if (collide) {
+            checkCollision(b);
+        }
+    }
+
+    public static void checkCollision(SuperBall b) {
+        for (SuperBall b2 : GamePanel.fruits) {
+            if (b2 != b && checkCollision(b, b2)) {
+                staticCollision(b, b2, false);
+            }
         }
     }
     public static boolean lose = false;
