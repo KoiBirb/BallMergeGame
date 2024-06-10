@@ -1,4 +1,4 @@
-package Main;
+package Sound;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -8,21 +8,20 @@ import java.net.URL;
 public class sound {
 
     Clip clip;
-    URL soundURL[] = new URL[30];
+    URL soundArray[] = new URL[5];
 
     public sound() {
 
-        soundURL[0] = getClass().getResource("/sound/background_music_1.wav");
-        soundURL[1] = getClass().getResource("/sound/background_music_2.wav");
-        soundURL[2] = getClass().getResource("/sound/background_music_3.wav");
-        soundURL[3] = getClass().getResource("/sound/battle_music_1.wav");
-        soundURL[4] = getClass().getResource("/sound/battle_music_1.wav");
-        soundURL[5] = getClass().getResource("/sound/key_collect.wav");
+        soundArray[0] = getClass().getResource("/sound/backgroundMusic.wav");
+        soundArray[1] = getClass().getResource("/sound/BombSound.wav");
+        soundArray[2] = getClass().getResource("/sound/chimeDown.wav");
+        soundArray[3] = getClass().getResource("/sound/chimeUp.wav");
+        soundArray[4] = getClass().getResource("/sound/mergeSound.wav");
     }
     public void setFile(int i){
 
         try{
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(soundArray[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
         }catch(Exception e){
@@ -30,7 +29,6 @@ public class sound {
         }
     }
     public void play(){
-
         clip.start();
     }
 

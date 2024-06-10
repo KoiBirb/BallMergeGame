@@ -4,6 +4,8 @@ import Ballhandlers.MergerHandler;
 import Ballhandlers.Spawner;
 import Balls.*;
 import GUI.ScoreBoard;
+import GUI.TitleScreen;
+import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
 
 import javax.imageio.ImageIO;
@@ -23,6 +25,7 @@ public class GamePanel {
     private final ScoreBoard sb = new ScoreBoard();
     private final MergerHandler mh = new MergerHandler();
     public static ArrayList<SuperBall> fruits = new ArrayList<>();
+    private final MusicHandler sound = TitleScreen.mh;
     BufferedImage image;
 
     // set default settings
@@ -38,6 +41,7 @@ public class GamePanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        sound.playMerge = true;
         gc.clear();
     }
 
@@ -63,6 +67,7 @@ public class GamePanel {
             ball.update();
         }
         mh.merge();
+        sound.update();
     }
 
     /**
