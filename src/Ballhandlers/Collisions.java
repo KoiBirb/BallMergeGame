@@ -102,4 +102,12 @@ public class Collisions {
             b.vy = 0;
         }
     }
+    public static boolean lose = false;
+    public static void outOfBounds(SuperBall b) {
+        if (b.y < 150 && b.vx < 0) {
+            lose = true;
+        }
+
+
+    }
 }

@@ -1,4 +1,6 @@
 package GUI;
+import Main.Main;
+import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
 
 import javax.imageio.ImageIO;
@@ -10,9 +12,11 @@ public class TitleScreen {
 
     //variables and class initializing
     private final int SLEEPTIME = 5;
-    Rectangle button, help;
+    public static Rectangle button, help;
     BufferedImage image, image2;
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
+    public static MusicHandler mh = new MusicHandler();
+    
    // Color string = new Color (160, 82, 45); //transparent color for buttons
 
     // set default settings
@@ -43,32 +47,32 @@ public class TitleScreen {
     }
 
     /**
-     * Starts the game
+     * Starts
      */
-    public boolean start() {
-        while (update()) {
+    public void start() {
+        while (Main.gameState == 0) {
+            update();
             draw();
             gc.sleep(SLEEPTIME);
         }
 
-        return true;
+       // return true;
     }
 
     /**
-     * Updates the game
+     * Updates
      */
-    private boolean update() {
-        if (gc.getMouseClick() > 0) {    //checks if the mouse is inside the rectangle, if so it is moved diagonally
-            if (button.contains(gc.getMouseX(), gc.getMouseY())) {
-                gc.setVisible(false);
-                return false;
-            }
+    private void update() {
+        mh.update();
+        //checks if the mouse is inside the rectangle
+        if (button.contains(gc.getMouseX(), gc.getMouseY())&&gc.getMouseClick() > 0) {
+            gc.setVisible(false);
+            Main.gameState = 1;
         }
-        return true;
     }
 
         /**
-         * Draws the game
+         * Draws
          */
         void draw () {
             synchronized (gc) {
@@ -79,24 +83,9 @@ public class TitleScreen {
 
                 if (help.contains(gc.getMouseX(), gc.getMouseY())) {    //check if mouse hovers over help
                     gc.setColor(Color.WHITE);
-
+                    mh.update();
                     gc.drawImage(image2,0,0); //display help
 
-                    /*
-                    Polygon info = new Polygon(); //thought bubble for text
-                    info.addPoint(760, 370); //1
-                    info.addPoint(1075, 370); //2
-                    info.addPoint(1075, 545); //3
-                    info.addPoint(1080, 565); //tip
-                    info.addPoint(1050, 545); //tip
-                    info.addPoint(760, 545);//4
-                    gc.fillPolygon(info);
-
-                    //draw string
-                    gc.setColor(string);
-                    gc.setFont( new Font( "Sans Serif", Font.BOLD, 18) );
-                    gc.drawString("instructions", 765,380);
-                    */
                 }
 
             }
