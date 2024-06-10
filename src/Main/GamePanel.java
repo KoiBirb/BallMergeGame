@@ -58,7 +58,6 @@ public class GamePanel {
      */
     private void update() {
         spawner.update();
-        sb.update();
         bucket.update();
         for (SuperBall ball : fruits) {
             ball.update();

@@ -37,8 +37,8 @@ public class Collisions {
             double vy2 = b2.vy * cos - b2.vx * sin;
 
             // resolve the 1D case
-            double vx1final = ((b1.radius/100.0 - b2.radius/100.0) * vx1 + 2 * b2.radius/100.0 * vx2) / (b1.radius/100.0 + b2.radius/100.0);
-            double vx2final = ((b2.radius/100.0 - b1.radius/100.0) * vx2 + 2 * b1.radius/100.0 * vx1) / (b1.radius/100.0 + b2.radius/100.0);
+            double vx1final = ((b1.weight - b2.weight) * vx1 + 2 * b2.weight * vx2) / (b1.weight + b2.weight);
+            double vx2final = ((b2.weight - b1.weight) * vx2 + 2 * b1.weight * vx1) / (b1.weight + b2.weight);
 
             vx1 = vx1final;
             vx2 = vx2final;
@@ -59,16 +59,8 @@ public class Collisions {
     public static void staticCollision(SuperBall b1, SuperBall b2, boolean emergency) {
         double overlap = b1.radius + b2.radius - distance(b1, b2);
 
-        SuperBall smallerObject;
-        SuperBall biggerObject;
-
-        if (b1.stopped) {
-            smallerObject = b2;
-            biggerObject = b1;
-        } else {
-            smallerObject = b1;
-            biggerObject = b2;
-        }
+        SuperBall smallerObject = b2;
+        SuperBall biggerObject = b1;
 
         if (emergency) {
             biggerObject = b2;

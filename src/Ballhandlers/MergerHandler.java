@@ -1,7 +1,6 @@
 package Ballhandlers;
 
 import Balls.*;
-import GUI.ScoreBoard;
 import Main.GamePanel;
 
 public class MergerHandler {
@@ -21,6 +20,7 @@ public class MergerHandler {
                                         GamePanel.fruits.get(i).y, GamePanel.fruits.get(i).diameter));
                                 if (GamePanel.fruits.get(i) == null) {
                                     GamePanel.fruits.remove(i);
+                                    GamePanel.fruits.remove(j);
                                 } else {
                                     GamePanel.fruits.get(i).isDropped = true;
                                     GamePanel.fruits.remove(j);
@@ -42,6 +42,7 @@ public class MergerHandler {
      * @return SuperBall object of the next ball in the tier
      */
     private SuperBall findNextBall (int x, int y, int diameter) {
+
         switch (diameter){
             case Cherry.DIAMETER:
                 x = x - Strawberry.DIAMETER/2;

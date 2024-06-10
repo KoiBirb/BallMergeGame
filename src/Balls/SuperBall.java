@@ -35,16 +35,8 @@ public class SuperBall {
             vx *= 0.99;
             vy *= 0.99;
 
-            if (vx <= 0.5 && vx >= -0.5 && vy <= 1 && vy >= -1) {
-                vx = 0;
-                vy = 0;
-                stopped = true;
-            }
-
-            if(!stopped) {
-                x += (int) vx;
-                y += (int) vy;
-            }
+            x += (int) vx;
+            y += (int) vy;
 
         } else
             x = GamePanel.gc.getMouseX() - diameter /2;
