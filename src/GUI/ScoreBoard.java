@@ -1,6 +1,8 @@
 package GUI;
 import java.awt.*;
 import java.awt.FontMetrics;
+
+import Ballhandlers.Collisions;
 import Main.GamePanel;
 
 public class ScoreBoard{
@@ -43,18 +45,20 @@ public class ScoreBoard{
         GamePanel.gc.fillRoundRect(60, 500,230, 40,30,30);
         GamePanel.gc.fillRoundRect(60, 550,230, 40,30,30);
         GamePanel.gc.setColor(Color.WHITE);
-        GamePanel.gc.drawString("88888", 65, 285);
-        GamePanel.gc.drawString("88888", 65, 335);
-        GamePanel.gc.drawString("88888", 65, 385);
-        GamePanel.gc.drawString("88888", 65, 435);
-        GamePanel.gc.drawString("88888", 65, 485);
-        GamePanel.gc.drawString("88888", 65, 535);
-        GamePanel.gc.drawString("88888", 65, 585);
+        GamePanel.gc.drawString(String.valueOf(topScores[0]), 65, 285);
+        GamePanel.gc.drawString(String.valueOf(topScores[1]), 65, 335);
+        GamePanel.gc.drawString(String.valueOf(topScores[2]), 65, 385);
+        GamePanel.gc.drawString(String.valueOf(topScores[3]), 65, 435);
+        GamePanel.gc.drawString(String.valueOf(topScores[4]), 65, 485);
+        GamePanel.gc.drawString(String.valueOf(topScores[5]), 65, 535);
+        GamePanel.gc.drawString(String.valueOf(topScores[6]), 65, 585);
 
     }
 
-    public void update() {
+    public void updateTopScores () {
+        if (Collisions.lose = true){
 
+        }
     }
 }
 
