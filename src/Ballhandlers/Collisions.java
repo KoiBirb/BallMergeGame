@@ -1,7 +1,6 @@
 package Ballhandlers;
 
 import Balls.SuperBall;
-import Main.GamePanel;
 
 import static java.lang.Math.*;
 import static java.lang.Math.cos;
@@ -9,7 +8,7 @@ import static java.lang.Math.cos;
 public class Collisions {
 
     public static boolean checkCollision (SuperBall b1, SuperBall b2) {
-        return Math.abs(distance(b1,b2)) <= Math.abs((b1.radius + b2.radius));
+        return distance(b1,b2) <= (b1.radius + b2.radius);
     }
 
     public static void handleCollisions (SuperBall b1, SuperBall b2) {
@@ -44,20 +43,32 @@ public class Collisions {
             vx1 = vx1final;
             vx2 = vx2final;
 
-//            //rotate vel back
-            b1.vx = vx1 * cos - vy1 * sin;
-            b1.vy = vy1 * cos + vx1 * sin;
-            b2.vx = vx2 * cos - vy2 * sin;
-            b2.vy = vy2 * cos + vx2 * sin;
+            //rotate vel back
 
+            if (!b1.stopped) {
+                b1.vx = vx1 * cos - vy1 * sin;
+                b1.vy = vy1 * cos + vx1 * sin;
+            }
+            if (!b2.stopped) {
+                b2.vx = vx2 * cos - vy2 * sin;
+                b2.vy = vy2 * cos + vx2 * sin;
+            }
         }
     }
 
     public static void staticCollision(SuperBall b1, SuperBall b2, boolean emergency) {
         double overlap = b1.radius + b2.radius - distance(b1, b2);
 
-        SuperBall smallerObject = b2;
-        SuperBall biggerObject = b1;
+        SuperBall smallerObject;
+        SuperBall biggerObject;
+
+        if (b1.stopped) {
+            smallerObject = b2;
+            biggerObject = b1;
+        } else {
+            smallerObject = b1;
+            biggerObject = b2;
+        }
 
         if (emergency) {
             biggerObject = b2;
@@ -86,15 +97,9 @@ public class Collisions {
             b.x = 850 - b.diameter;
             b.vx *= -0.90;
         }
-
-        else if (b.y + b.diameter >= 650) {
+        if (b.y + b.diameter >= 650) {
             b.y = 650 - b.diameter;
             b.vy = 0;
-            for (SuperBall ball : GamePanel.fruits) {
-                if (ball.isDropped && checkCollision(b, ball) && ball != b) {
-                    staticCollision(b, ball, false);
-                }
-            }
         }
     }
 }

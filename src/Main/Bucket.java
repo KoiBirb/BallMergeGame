@@ -1,7 +1,4 @@
-package Balls;
-
-import Main.GamePanel;
-
+package Main;
 import java.awt.*;
 
 public class Bucket {
@@ -9,7 +6,6 @@ public class Bucket {
     Rectangle r;
 
     Color bucketBackground = new Color(248, 229, 187, 95);
-
     Color bucketOutline = new Color (255, 240,201);
 
     public Bucket() {
@@ -33,8 +29,6 @@ public class Bucket {
         GamePanel.gc.drawLine((r.x+20), (r.y -25), ((r.x+ r.width) -20), (r.y-25)); //"3d" lines
         GamePanel.gc.drawLine((r.x+20), (r.y -25), r.x , r.y );
         GamePanel.gc.drawLine(((r.x+ r.width) -20), (r.y-25), (r.x + r.width) , r.y );
-
-
 
     }
 }

@@ -5,7 +5,6 @@ import Ballhandlers.Spawner;
 import Balls.*;
 import GUI.ScoreBoard;
 import hsa2.GraphicsConsole;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class GamePanel {
-
-    private final int SLEEPTIME = 5;
 
     // initialize classes
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
@@ -48,7 +45,7 @@ public class GamePanel {
        while (true) {
            update();
            draw();
-           gc.sleep(SLEEPTIME);
+           gc.sleep(5);
        }
     }
 
