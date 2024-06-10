@@ -42,6 +42,14 @@ public class ScoreBoard{
         GamePanel.gc.fillRoundRect(60, 450,230, 40,30,30);
         GamePanel.gc.fillRoundRect(60, 500,230, 40,30,30);
         GamePanel.gc.fillRoundRect(60, 550,230, 40,30,30);
+        GamePanel.gc.setColor(Color.WHITE);
+        GamePanel.gc.drawString("88888", 65, 285);
+        GamePanel.gc.drawString("88888", 65, 335);
+        GamePanel.gc.drawString("88888", 65, 385);
+        GamePanel.gc.drawString("88888", 65, 435);
+        GamePanel.gc.drawString("88888", 65, 485);
+        GamePanel.gc.drawString("88888", 65, 535);
+        GamePanel.gc.drawString("88888", 65, 585);
 
     }
 
