@@ -4,6 +4,7 @@ import java.awt.FontMetrics;
 
 import Ballhandlers.Collisions;
 import Main.GamePanel;
+import Main.Sort;
 
 public class ScoreBoard{
 
@@ -55,10 +56,11 @@ public class ScoreBoard{
 
     }
 
-    public void updateTopScores () {
-        if (Collisions.lose = true){
-
+    public void update () {
+        if (Collisions.lose == true && score < topScores[6]){
+            topScores[6] = score;
         }
+        topScores = Sort.mergeSort(topScores);
     }
 }
 
