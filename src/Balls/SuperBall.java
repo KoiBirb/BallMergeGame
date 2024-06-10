@@ -32,8 +32,15 @@ public class SuperBall {
             // gravity
             vy += 1;
 
-            vx *= 0.99;
-            vy *= 0.99;
+            vx *= 0.95;
+            vy *= 0.95;
+
+            if (vx < 4) {
+                vx = 0;
+            }
+            if (vy < 4) {
+                vy = 4;
+            }
 
             x += (int) vx;
             y += (int) vy;
