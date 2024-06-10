@@ -1,4 +1,5 @@
 package GUI;
+import Main.Main;
 import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
 
@@ -15,6 +16,7 @@ public class TitleScreen {
     BufferedImage image, image2;
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
     public static MusicHandler mh = new MusicHandler();
+    
    // Color string = new Color (160, 82, 45); //transparent color for buttons
 
     // set default settings
@@ -47,26 +49,26 @@ public class TitleScreen {
     /**
      * Starts
      */
-    public boolean start() {
-        while (update()) {
+    public void start() {
+        while (Main.gameState == 0) {
+            update();
             draw();
             gc.sleep(SLEEPTIME);
         }
 
-        return true;
+       // return true;
     }
 
     /**
      * Updates
      */
-    private boolean update() {
+    private void update() {
         mh.update();
         //checks if the mouse is inside the rectangle
         if (button.contains(gc.getMouseX(), gc.getMouseY())&&gc.getMouseClick() > 0) {
             gc.setVisible(false);
-            return false;
+            Main.gameState = 1;
         }
-        return true;
     }
 
         /**
@@ -83,7 +85,6 @@ public class TitleScreen {
                     gc.setColor(Color.WHITE);
                     mh.update();
                     gc.drawImage(image2,0,0); //display help
-
 
                 }
 

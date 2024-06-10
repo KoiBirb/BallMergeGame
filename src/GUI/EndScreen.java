@@ -1,4 +1,5 @@
 package GUI;
+import Main.Main;
 import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
 
@@ -58,7 +59,17 @@ public class EndScreen {
         }
     }
 
-    public void reset() {
+    public void start() {
+        while (Main.gameState == 2) {
+            update();
+            draw();
+            reset();
+            gc.sleep(SLEEPTIME);
+        }
+
+        // return true;
+    }
+    public void reset() { //reset all variables
 
     }
 }

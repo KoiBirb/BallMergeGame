@@ -49,7 +49,7 @@ public class GamePanel {
      * Starts the game
      */
     public void start() {
-       while (true) {
+       while (Main.gameState == 1) {
            update();
            draw();
            gc.sleep(SLEEPTIME);
