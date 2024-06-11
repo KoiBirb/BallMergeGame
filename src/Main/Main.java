@@ -14,9 +14,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        mh.playMusic(0);
-        // Create a new GamePanel object and start the game
-       while (true) {
+        mh.playBackgroundMusic();
+
+        while (true) {
 
            TitleScreen.gc.setVisible(false);
            GamePanel.gc.setVisible(false);
