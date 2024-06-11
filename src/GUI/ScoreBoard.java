@@ -2,21 +2,28 @@ package GUI;
 import java.awt.*;
 import java.awt.FontMetrics;
 
+import Ballhandlers.Collisions;
 import Main.GamePanel;
+import Main.Sort;
 
 public class ScoreBoard{
 
     Rectangle r;
     Color transparentWhite = new Color(255, 255, 255, 40);
     public static int score = 0;
-    static int[] topScores = new int[7];
+    int[] topScores = new int[7];
     Font font = new Font("Arial", Font.BOLD, 40);
     FontMetrics fm = GamePanel.gc.getFontMetrics(font);
-   
+
+    //constructor
     public ScoreBoard() {
         super();
         r = new Rectangle(25, 200, 300,400);
     }
+
+    /*
+     * Draws graphics
+     */
 
     public void draw() {
         GamePanel.gc.setColor(new Color(248, 229, 187, 95));
@@ -29,7 +36,7 @@ public class ScoreBoard{
         GamePanel.gc.setColor(transparentWhite);
         GamePanel.gc.fillOval(100, 40, 150, 150);
         GamePanel.gc.setColor(Color.white);
-        GamePanel.gc.setFont(font);
+        GamePanel.gc.setFont (font);
         GamePanel.gc.drawString(String.valueOf(score), 175 - (fm.stringWidth(String.valueOf(score)))/2, 130);
         GamePanel.gc.drawString("TOP SCORES", 55, 240);
         GamePanel.gc.setColor(new Color(250, 194, 61, 255));
@@ -44,14 +51,15 @@ public class ScoreBoard{
         GamePanel.gc.fillRoundRect(60, 500,230, 40,30,30);
         GamePanel.gc.fillRoundRect(60, 550,230, 40,30,30);
         GamePanel.gc.setColor(Color.WHITE);
-        GamePanel.gc.drawString(String.valueOf(topScores[0]), 65, 285);
-        GamePanel.gc.drawString(String.valueOf(topScores[1]), 65, 335);
-        GamePanel.gc.drawString(String.valueOf(topScores[2]), 65, 385);
-        GamePanel.gc.drawString(String.valueOf(topScores[3]), 65, 435);
-        GamePanel.gc.drawString(String.valueOf(topScores[4]), 65, 485);
-        GamePanel.gc.drawString(String.valueOf(topScores[5]), 65, 535);
-        GamePanel.gc.drawString(String.valueOf(topScores[6]), 65, 585);
+        GamePanel.gc.drawString(String.valueOf(topScores[0]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 285);
+        GamePanel.gc.drawString(String.valueOf(topScores[1]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 335);
+        GamePanel.gc.drawString(String.valueOf(topScores[2]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 385);
+        GamePanel.gc.drawString(String.valueOf(topScores[3]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 435);
+        GamePanel.gc.drawString(String.valueOf(topScores[4]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 485);
+        GamePanel.gc.drawString(String.valueOf(topScores[5]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 535);
+        GamePanel.gc.drawString(String.valueOf(topScores[6]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 585);
 
     }
+
 }
 
