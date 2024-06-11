@@ -14,7 +14,6 @@ public class ScoreBoard{
 
     //constructor
     public ScoreBoard() {
-        super();
         r = new Rectangle(25, 200, 300,400);
     }
 

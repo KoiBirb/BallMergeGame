@@ -54,7 +54,6 @@ public class GamePanel {
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/GameScreen.jpg")));
         } catch (Exception ignored) {}
-        sound.playDrop = true;
         gc.clear();
     }
 
@@ -85,9 +84,9 @@ public class GamePanel {
         }
 
         // update objects
+        sound.update();
         spawner.update();
         mh.merge();
-        sound.update();
 
         // avoid current modification exception
         for(int i = 0; i < fruits.size(); i++) {

@@ -33,7 +33,7 @@ public class sound {
             clip = AudioSystem.getClip();
             clip.open(ais);
         }catch(Exception e){
-
+            System.out.println("Error loading sound, File number: " + i);
         }
     }
 
@@ -48,7 +48,6 @@ public class sound {
      * Loops the background music
      */
     public void loop(){
-
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 }

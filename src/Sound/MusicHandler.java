@@ -9,7 +9,6 @@ public class MusicHandler {
     //import necessary objects
     sound music = new sound();
     sound effect = new sound();
-    public boolean playDrop = false;
 
     /**
      * Checks if fruit are dropped or help, plays correct sound effect from array
@@ -17,7 +16,7 @@ public class MusicHandler {
     public void update(){
 
         try {
-            if (playDrop && GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {
+            if (GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {
                 playSoundEffect(4);
             }
         } catch (IndexOutOfBoundsException ignored){}
