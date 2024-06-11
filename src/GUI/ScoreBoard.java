@@ -2,16 +2,14 @@ package GUI;
 import java.awt.*;
 import java.awt.FontMetrics;
 
-import Ballhandlers.Collisions;
 import Main.GamePanel;
-import Main.Sort;
 
 public class ScoreBoard{
 
     Rectangle r;
     Color transparentWhite = new Color(255, 255, 255, 40);
     public static int score = 0;
-    int[] topScores = new int[7];
+    static int[] topScores = new int[7];
     Font font = new Font("Arial", Font.BOLD, 40);
     FontMetrics fm = GamePanel.gc.getFontMetrics(font);
    
@@ -31,7 +29,7 @@ public class ScoreBoard{
         GamePanel.gc.setColor(transparentWhite);
         GamePanel.gc.fillOval(100, 40, 150, 150);
         GamePanel.gc.setColor(Color.white);
-        GamePanel.gc.setFont (font);
+        GamePanel.gc.setFont(font);
         GamePanel.gc.drawString(String.valueOf(score), 175 - (fm.stringWidth(String.valueOf(score)))/2, 130);
         GamePanel.gc.drawString("TOP SCORES", 55, 240);
         GamePanel.gc.setColor(new Color(250, 194, 61, 255));
@@ -54,13 +52,6 @@ public class ScoreBoard{
         GamePanel.gc.drawString(String.valueOf(topScores[5]), 65, 535);
         GamePanel.gc.drawString(String.valueOf(topScores[6]), 65, 585);
 
-    }
-
-    public void update () {
-        if (Collisions.lose == true && score < topScores[6]){
-            topScores[6] = score;
-        }
-        topScores = Sort.mergeSort(topScores);
     }
 }
 

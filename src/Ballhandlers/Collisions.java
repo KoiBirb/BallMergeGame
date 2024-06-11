@@ -2,18 +2,17 @@
  * Collisions.java
  * Leo Bogaert
  * June 12, 2024
- * This class handles all the collisions between the balls and the walls and between the balls themselves.
+ * This class contains methods that handle and detect collisions between balls and  walls
  */
 package Ballhandlers;
 
 import Balls.SuperBall;
 import Main.GamePanel;
+import Main.Main;
 
 import static java.lang.Math.*;
 
 public class Collisions {
-
-    public static boolean lose = false;
 
     public static boolean checkCollision (SuperBall b1, SuperBall b2) {
         return distance(b1,b2) <= (b1.radius + b2.radius);
@@ -98,11 +97,9 @@ public class Collisions {
         }
     }
 
-    public static void outOfBounds(SuperBall b) {
-        if (b.y < 150 && b.vx < 0) {
-            lose = true;
+    public static void checkLost(SuperBall b) {
+        if (b.y < 150 && b.vx <= 0) {
+            Main.gameState = 2;
         }
-
-
     }
 }

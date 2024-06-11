@@ -16,9 +16,11 @@ public class MusicHandler {
 //    }3
     public void update(){
 
-        if (playMerge && GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {
-            playSoundEffect(4);
-        }
+        try {
+            if (playMerge && GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {
+                playSoundEffect(4);
+            }
+        } catch (IndexOutOfBoundsException ignored){}
 
         if (help.contains(gc.getMouseX(), gc.getMouseY())){
             playSoundEffect(3);

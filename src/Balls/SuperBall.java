@@ -10,7 +10,7 @@ public class SuperBall {
     public int x,y, diameter, radius;
     public double vx, vy = 1, weight;
     public boolean isDropped, touchingWall;
-    private long lastTime = System.currentTimeMillis();
+    private final long lastTime = System.currentTimeMillis();
 
     public SuperBall(int x, int y, int diameter) {
         this.x = x;
@@ -47,6 +47,5 @@ public class SuperBall {
 
     public void draw(GraphicsConsole gc) {
         gc.drawImage(image, x, y, diameter, diameter);
-        gc.drawOval(x, y, diameter, diameter);
     }
 }

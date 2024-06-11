@@ -16,28 +16,39 @@ import java.util.Objects;
 public class GamePanel {
 
     // initialize classes
-    public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
-    private final Spawner spawner = new Spawner();
-    private final Bucket bucket = new Bucket();
-    private final ScoreBoard sb = new ScoreBoard();
-    private final MergerHandler mh = new MergerHandler();
-    public static ArrayList<SuperBall> fruits = new ArrayList<>();
-    private final MusicHandler sound = TitleScreen.mh;
+    public static GraphicsConsole gc;
+    private final Spawner spawner;
+    private final Bucket bucket;
+    private final ScoreBoard sb;
+    private final MergerHandler mh;
+    public static ArrayList<SuperBall> fruits;
+    private final MusicHandler sound;
     BufferedImage image;
+    Rectangle menu, end;
 
     // set default settings
     public GamePanel() {
+
+        gc = new GraphicsConsole(1200, 650);
+        spawner = new Spawner();
+        bucket = new Bucket();
+        sb = new ScoreBoard();
+        mh = new MergerHandler();
+        fruits = new ArrayList<>();
+        sound = TitleScreen.mh;
+
+        menu = new Rectangle(454, 425, 301, 63);
+        end = new Rectangle(600, 425, 301, 63);
+
         gc.setAntiAlias(true);
         gc.setLocationRelativeTo(null);
         gc.enableMouseMotion();
         gc.enableMouse();
-        gc.setTitle("Ball Drop");
+        gc.setTitle("SUIKA GAME");
         gc.setBackgroundColor(Color.decode("#eab676"));
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/GameScreen.jpg")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
         sound.playMerge = true;
         gc.clear();
     }
@@ -57,9 +68,18 @@ public class GamePanel {
      * Updates the game
      */
     private void update() {
+        // Change Game state
+
+        if (menu.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
+            Main.gameState = 0;
+        }
+
+        if (end.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
+            Main.gameState = 2;
+        }
+
         spawner.update();
         bucket.update();
-        sb.update();
         for (SuperBall ball : fruits) {
             ball.update();
         }
@@ -75,9 +95,11 @@ public class GamePanel {
             gc.clear();
             gc.clearRotation();
             gc.drawImage(image,0,0);
-
-            bucket.draw();
+            gc.drawRect(menu.x, menu.y, menu.width, menu.height);
+            gc.drawRect(end.x, end.y, end.width, end.height);
             sb.draw();
+            bucket.draw();
+
             spawner.draw();
             for (SuperBall ball : fruits) {
                 ball.draw(gc);

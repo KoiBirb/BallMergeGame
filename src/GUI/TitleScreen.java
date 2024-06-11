@@ -2,7 +2,7 @@ package GUI;
 import Main.Main;
 import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
-
+import Main.GamePanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,8 +16,6 @@ public class TitleScreen {
     BufferedImage image, image2;
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
     public static MusicHandler mh = new MusicHandler();
-    
-   // Color string = new Color (160, 82, 45); //transparent color for buttons
 
     // set default settings
     public TitleScreen() {
@@ -26,8 +24,7 @@ public class TitleScreen {
         gc.enableMouseMotion();
         gc.enableMouse();
         gc.setTitle("SUIKA GAME");
-        gc.setBackgroundColor(Color.decode("#eab676")); //incase the image doesnt work
-        gc.clear();
+        gc.setBackgroundColor(Color.decode("#eab676"));
 
         try { //import image title screen
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/TitleScreen.jpg")));
@@ -44,6 +41,7 @@ public class TitleScreen {
         button = new Rectangle(454, 425, 301, 63); //button to get into the game
         help = new Rectangle( 948, 567, 225, 60); //button to get help
 
+        gc.clear();
     }
 
     /**

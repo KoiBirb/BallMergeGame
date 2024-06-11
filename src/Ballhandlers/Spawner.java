@@ -7,12 +7,12 @@ import java.util.Random;
 public class Spawner {
     private final Random random = new Random();
 
-    public Spawner() {
-        spawnBall();
-    }
-
     public void update() {
-        if (GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped){
+        try {
+            if (GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {
+                spawnBall();
+            }
+        } catch (IndexOutOfBoundsException e) {
             spawnBall();
         }
     }

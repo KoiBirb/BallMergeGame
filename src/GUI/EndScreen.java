@@ -2,11 +2,12 @@ package GUI;
 import Main.Main;
 import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
-
+import Main.Sort;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
+import Main.GamePanel;
 
 public class EndScreen {
     //variables and class initializing
@@ -25,7 +26,6 @@ public class EndScreen {
         gc.enableMouse();
         gc.setTitle("YOU LOSE");
         gc.setBackgroundColor(Color.decode("#eab676")); //incase the image doesnt work
-        gc.clear();
 
         button = new Rectangle(454, 425, 301, 63); //button to get into the game
 
@@ -34,19 +34,19 @@ public class EndScreen {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        gc.clear();
     }
 
     /**
      * Updates
      */
-    private boolean update() {
+    private void update() {
         mh.update();
         //checks if the mouse is inside the rectangle
         if (button.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
-            gc.setVisible(false);
-            return false;
+            Main.gameState = 1;
         }
-        return true;
     }
 
     //draw
@@ -54,23 +54,23 @@ public class EndScreen {
         synchronized (gc) {
             gc.clear();
             gc.clearRotation();
-
+            gc.setColor(Color.RED);
             gc.drawImage(image, 0, 0);
+            gc.drawRect(454, 425, 301, 63);
         }
     }
 
     public void start() {
+        if (ScoreBoard.score > ScoreBoard.topScores[6]) {
+            ScoreBoard.topScores[6] = ScoreBoard.score;
+        }
+        ScoreBoard.topScores = Sort.mergeSort(ScoreBoard.topScores);
+
         while (Main.gameState == 2) {
             update();
             draw();
-            reset();
             gc.sleep(SLEEPTIME);
         }
-
-        // return true;
-    }
-    public void reset() { //reset all variables
-
     }
 }
 
