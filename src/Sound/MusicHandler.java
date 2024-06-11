@@ -9,12 +9,12 @@ public class MusicHandler {
 
     sound music = new sound();
     sound effect = new sound();
-    public boolean playMerge = false;
+    public boolean playDrop = false;
 
     public void update(){
 
         try {
-            if (playMerge && GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {
+            if (playDrop && GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {
                 playSoundEffect(4);
             }
         } catch (IndexOutOfBoundsException ignored){}
@@ -25,10 +25,14 @@ public class MusicHandler {
                 playSoundEffect(2);
             }
         }
-        if(false){
-            music.stop();
-            playSoundEffect(1);
-        }
+    }
+
+    public void playBackgroundMusic(){
+        playMusic(0);
+    }
+
+    public void playEndSoundEffect(){
+        playMusic(1);
     }
 
 
@@ -36,10 +40,6 @@ public class MusicHandler {
         music.setFile(i);
         music.play();
         music.loop();
-    }
-
-    private void stopMusic(){
-        music.stop();
     }
 
     private void playSoundEffect(int i) {

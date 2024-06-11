@@ -14,17 +14,24 @@ import static java.lang.Math.*;
 
 public class Collisions {
 
+    /**
+     * Checks if the balls are colliding by comparing distances
+     * between them and the radi
+     * @param b1
+     * @param b2
+     * @return
+     */
     public static boolean checkCollision (SuperBall b1, SuperBall b2) {
         return distance(b1,b2) <= (b1.radius + b2.radius);
     }
 
     public static void handleCollisions (SuperBall b1, SuperBall b2) {
 
-//        if (b2.radius > b1.radius)
-//            staticCollision(b1, b2, false);
-//        else
-//            staticCollision(b2, b1, false);
-//
+        if (b2.radius > b1.radius)
+            staticCollision(b1, b2, false);
+        else
+            staticCollision(b2, b1, false);
+
 
         int xDist = b1.x - b2.x;
         int yDist = b1.y - b2.y;
