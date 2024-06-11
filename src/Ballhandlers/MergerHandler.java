@@ -17,15 +17,10 @@ public class MergerHandler {
                         if (Collisions.checkCollision(GamePanel.fruits.get(i), GamePanel.fruits.get(j))) {
                             Collisions.handleCollisions(GamePanel.fruits.get(i), GamePanel.fruits.get(j));
                             if (GamePanel.fruits.get(i).radius == GamePanel.fruits.get(j).radius) {
-                                GamePanel.fruits.set(i, findNextBall((GamePanel.fruits.get(i).x + GamePanel.fruits.get(j).x + GamePanel.fruits.get(j).diameter)/2,
+                                GamePanel.fruits.set(i, findNextBall((GamePanel.fruits.get(i).x + GamePanel.fruits.get(j).x + GamePanel.fruits.get(j).diameter) / 2,
                                         GamePanel.fruits.get(i).y, GamePanel.fruits.get(i).diameter));
-                                if (GamePanel.fruits.get(i) == null) {
-                                    GamePanel.fruits.remove(i);
-                                    GamePanel.fruits.remove(j);
-                                } else {
-                                    GamePanel.fruits.get(i).isDropped = true;
-                                    GamePanel.fruits.remove(j);
-                                }
+                                GamePanel.fruits.get(i).isDropped = true;
+                                GamePanel.fruits.remove(j);
                                 j--;
                             }
                         }
@@ -81,8 +76,10 @@ public class MergerHandler {
                 ScoreBoard.score += 30;
                 return new Watermelon(x, y);
             case Watermelon.DIAMETER:
+                x = x - Cherry.DIAMETER/2;
+                x = (x < 350) ? 350 : (x + Cherry.DIAMETER > 850) ? 850 - Cherry.DIAMETER : x;
                 ScoreBoard.score += 60;
-                return null;
+                return new Cherry(x, y);
         }
         return null;
     }

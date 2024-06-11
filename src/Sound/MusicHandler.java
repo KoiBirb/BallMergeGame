@@ -11,10 +11,9 @@ public class MusicHandler {
     sound effect = new sound();
     public boolean playMerge = false;
 
-    public MusicHandler(){
-        playMusic(0);
-    }
-
+//    public MusicHandler(){
+//        playMusic(0);
+//    }3
     public void update(){
 
         if (playMerge && GamePanel.fruits.get(GamePanel.fruits.size() - 1).isDropped) {

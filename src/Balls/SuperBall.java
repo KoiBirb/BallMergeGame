@@ -9,7 +9,7 @@ public class SuperBall {
     public BufferedImage image;
     public int x,y, diameter, radius;
     public double vx, vy = 1, weight;
-    public boolean isDropped, touchingWall, stopped;
+    public boolean isDropped, touchingWall;
     private long lastTime = System.currentTimeMillis();
 
     public SuperBall(int x, int y, int diameter) {
@@ -30,20 +30,14 @@ public class SuperBall {
 
         if (isDropped){
             // gravity
-            vy += 1;
 
             vx *= 0.95;
             vy *= 0.95;
 
-            if (vx < 4) {
-                vx = 0;
-            }
-            if (vy < 4) {
-                vy = 4;
-            }
+            vy += 1;
 
-            x += (int) vx;
-            y += (int) vy;
+            x += (int) Math.round(vx);
+            y += (int) Math.round(vy);
 
         } else
             x = GamePanel.gc.getMouseX() - diameter /2;
@@ -53,5 +47,6 @@ public class SuperBall {
 
     public void draw(GraphicsConsole gc) {
         gc.drawImage(image, x, y, diameter, diameter);
+        gc.drawOval(x, y, diameter, diameter);
     }
 }

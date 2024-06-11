@@ -1,12 +1,19 @@
+/*
+ * Collisions.java
+ * Leo Bogaert
+ * June 12, 2024
+ * This class handles all the collisions between the balls and the walls and between the balls themselves.
+ */
 package Ballhandlers;
 
 import Balls.SuperBall;
 import Main.GamePanel;
 
 import static java.lang.Math.*;
-import static java.lang.Math.cos;
 
 public class Collisions {
+
+    public static boolean lose = false;
 
     public static boolean checkCollision (SuperBall b1, SuperBall b2) {
         return distance(b1,b2) <= (b1.radius + b2.radius);
@@ -14,46 +21,33 @@ public class Collisions {
 
     public static void handleCollisions (SuperBall b1, SuperBall b2) {
 
-        if (b1.radius > b2.radius)
+        if (b2.radius > b1.radius)
             staticCollision(b1, b2, false);
         else
             staticCollision(b2, b1, false);
 
-        int b1x = b1.x + b1.radius;
 
-        int b2x = b2.x + b2.radius;
-        int b2y = b2.y + b2.radius;
-
-        double dx = b2x - b1x;
-        double dy = b2y - b1x;
-
-        if (checkCollision(b1, b2)) {
-            double angle = atan2(dy, dx);
-            double sin = sin(angle), cos = cos(angle);
-
-            // rotate velocity
-            double vx1 = b1.vx * cos + b1.vy * sin;
-            double vy1 = b1.vy * cos - b1.vx * sin;
-            double vx2 = b2.vx * cos + b2.vy * sin;
-            double vy2 = b2.vy * cos - b2.vx * sin;
-
-            // resolve the 1D case
-            double vx1final = ((b1.weight - b2.weight) * vx1 + 2 * b2.weight * vx2) / (b1.weight + b2.weight);
-            double vx2final = ((b2.weight - b1.weight) * vx2 + 2 * b1.weight * vx1) / (b1.weight + b2.weight);
-
-            vx1 = vx1final;
-            vx2 = vx2final;
-
-            //rotate vel back
-
-            if (!b1.stopped) {
-                b1.vx = vx1 * cos - vy1 * sin;
-                b1.vy = vy1 * cos + vx1 * sin;
-            }
-            if (!b2.stopped) {
-                b2.vx = vx2 * cos - vy2 * sin;
-                b2.vy = vy2 * cos + vx2 * sin;
-            }
+        int xDist = b1.x - b2.x;
+        int yDist = b1.y - b2.y;
+        double distSquared = xDist*xDist + yDist*yDist;
+        //Check the squared distances instead of the the distances, same result, but avoids a square root.
+        double xVelocity = b2.vx - b1.vx;
+        double yVelocity = b2.vy - b1.vy;
+        double dotProduct = xDist * xVelocity + yDist * yVelocity;
+        //Neat vector maths, used for checking if the objects moves towards one another.
+        if (dotProduct > 0) {
+            double collisionScale = dotProduct / distSquared;
+            double xCollision = xDist * collisionScale;
+            double yCollision = yDist * collisionScale;
+            //The Collision vector is the speed difference projected on the Dist vector,
+            //thus it is the component of the speed difference needed for the collision.
+            double combinedMass = b1.weight + b2.weight;
+            double collisionWeightA = 2 * b2.weight / combinedMass;
+            double collisionWeightB = 2 * b1.weight / combinedMass;
+            b1.vx += collisionWeightA * xCollision;
+            b1.vy += collisionWeightA * yCollision;
+            b2.vx -= collisionWeightB * xCollision;
+            b2.vy -= collisionWeightB * yCollision;
         }
     }
 
@@ -95,18 +89,15 @@ public class Collisions {
             collide = true;
         }
         if (collide) {
-            checkCollision(b);
-        }
-    }
-
-    public static void checkCollision(SuperBall b) {
-        for (SuperBall b2 : GamePanel.fruits) {
-            if (b2 != b && checkCollision(b, b2)) {
-                staticCollision(b, b2, false);
+            for (SuperBall b2 : GamePanel.fruits) {
+                if (b2 != b && checkCollision(b, b2)) {
+                    staticCollision(b, b2, false);
+                    b.vx = 0;
+                }
             }
         }
     }
-    public static boolean lose = false;
+
     public static void outOfBounds(SuperBall b) {
         if (b.y < 150 && b.vx < 0) {
             lose = true;

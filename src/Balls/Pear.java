@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Pear extends SuperBall{
 
-    public static final int DIAMETER = 200;
+    public static final int DIAMETER = 240;
 
     public Pear(int x, int y) {
         super(x, y, DIAMETER);
