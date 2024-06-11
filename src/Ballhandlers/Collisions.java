@@ -33,10 +33,8 @@ public class Collisions {
     public static void handleCollisions (SuperBall b1, SuperBall b2) {
 
         // Correct the position of the balls if they are overlapping
-        if (b2.radius > b1.radius)
-            staticCollision(b1, b2);
-        else
-            staticCollision(b2, b1);
+        if (b2.radius > b1.radius) staticCollision(b1, b2);
+        else staticCollision(b2, b1);
 
         int xDist = (b1.x + b1.radius) - (b2.x + b2.radius);
         int yDist = (b1.y + b1.radius) - (b2.y + b2.radius);
@@ -46,7 +44,7 @@ public class Collisions {
         double distSquared = xDist*xDist + yDist*yDist; // avoid square root
         double dotProduct = xDist * xVelDiff + yDist * yVelDiff;
 
-        if (dotProduct > 0) { // check if the objects are moving towards each other
+        if (dotProduct > 0) { // Check if fruit are going towards eachother
             double colScale = dotProduct / distSquared;
             double xCol = xDist * colScale;
             double yCol = yDist * colScale;
