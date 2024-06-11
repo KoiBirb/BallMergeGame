@@ -56,7 +56,7 @@ public class EndScreen {
             gc.clearRotation();
             gc.setColor(Color.RED);
             gc.drawImage(image, 0, 0);
-            gc.drawRect(button.x, button.y, 301, 63);
+           //gc.drawRect(button.x, button.y, 301, 63);
         }
     }
 

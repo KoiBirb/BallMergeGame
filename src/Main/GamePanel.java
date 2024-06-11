@@ -26,6 +26,8 @@ public class GamePanel {
     private final MusicHandler sound;
     BufferedImage image;
     Rectangle menu, end;
+    Color buttonBackground = new Color(248, 229, 187, 98);
+    Color buttonOutline = new Color (255, 240,201);
 
     // set default settings
     public GamePanel() {
@@ -37,7 +39,6 @@ public class GamePanel {
         mh = new MergerHandler();
         fruits = new ArrayList<>();
         sound = TitleScreen.mh;
-        Font font = new Font("Arial", Font.BOLD, 40);
 
         menu = new Rectangle(875, 275, 301, 63);
         end = new Rectangle(875, 415, 301, 63);
@@ -100,12 +101,18 @@ public class GamePanel {
             gc.clear();
             gc.clearRotation();
             gc.drawImage(image,0,0);
+
+            gc.setColor(buttonBackground);
             gc.fillRoundRect(menu.x, menu.y, menu.width, menu.height, 30,30);
             gc.fillRoundRect(end.x, end.y, end.width, end.height, 30,30);
 
-            gc.setColor(Color.BLACK);
-            gc.drawString("Menu", menu.x+90, menu.y+45);
-            gc.drawString("End Game", end.x+50, end.y+45);
+            gc.setColor(buttonOutline);
+            gc.drawRoundRect(menu.x, menu.y, menu.width, menu.height, 30,30);
+            gc.drawRoundRect(end.x, end.y, end.width, end.height, 30,30);
+
+            gc.setColor(Color.WHITE);
+            gc.drawString("MENU", menu.x+90, menu.y+45);
+            gc.drawString("END GAME", end.x+50, end.y+45);
             sb.draw();
             bucket.draw();
 
