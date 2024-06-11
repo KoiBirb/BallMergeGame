@@ -8,7 +8,7 @@ package Balls;
 
 public class Watermelon extends SuperBall {
 
-    public static final int DIAMETER = 320;
+    public static final int DIAMETER = 300;
 
     /**
      * Watermelon constructor

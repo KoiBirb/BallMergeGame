@@ -8,7 +8,7 @@ package Balls;
 
 public class Lemon extends SuperBall{
 
-    public static final int DIAMETER = 90;
+    public static final int DIAMETER = 100;
 
     /**
      * Lemon constructor

@@ -8,7 +8,7 @@ package Balls;
 
 public class Apple extends SuperBall{
 
-    public static final int DIAMETER = 190;
+    public static final int DIAMETER = 180;
 
     /**
      * Apple constructor

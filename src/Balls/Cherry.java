@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Cherry extends SuperBall {
 
-    public static final int DIAMETER = 30;
+    public static final int DIAMETER = 40;
 
     /**
      * Cherry constructor
