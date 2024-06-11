@@ -1,3 +1,9 @@
+/*
+ * MergerHandler.java
+ * Leo Bogaert
+ * June 12, 2024
+ * Handles merges and calls collision methods between balls
+ */
 package Ballhandlers;
 
 import Balls.*;
@@ -8,12 +14,14 @@ public class MergerHandler {
 
     /**
      * Merges balls of the same size to the next tier of fruit
+     * Checks for collisions and calls handler
      */
     public void merge() {
         for (int i = 0; i < GamePanel.fruits.size(); i++) {
             if (GamePanel.fruits.get(i).isDropped) {
                 for (int j = i + 1; j < GamePanel.fruits.size(); j++) {
                     if (GamePanel.fruits.get(j).isDropped) {
+
                         if (Collisions.checkCollision(GamePanel.fruits.get(i), GamePanel.fruits.get(j))) {
                             Collisions.handleCollisions(GamePanel.fruits.get(i), GamePanel.fruits.get(j));
                             if (GamePanel.fruits.get(i).radius == GamePanel.fruits.get(j).radius) {
@@ -41,6 +49,7 @@ public class MergerHandler {
 
         switch (diameter){
             case Cherry.DIAMETER:
+                // finding middle position to place ball
                 x = x - Strawberry.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Strawberry.DIAMETER > 850) ? 850 - Strawberry.DIAMETER : x;
                 ScoreBoard.score += 1;

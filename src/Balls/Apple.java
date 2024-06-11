@@ -1,18 +1,22 @@
+/*
+ * Apple.java
+ * Leo Bogaert
+ * June 12, 2024
+ * Apple object
+ */
 package Balls;
-
-import javax.imageio.ImageIO;
-import java.util.Objects;
 
 public class Apple extends SuperBall{
 
     public static final int DIAMETER = 190;
 
+    /**
+     * Apple constructor
+     * @param x int position of the apple
+     * @param y int position of the apple
+     */
     public Apple(int x,int y) {
         super(x, y, DIAMETER);
-        try {
-            super.image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/Fruit/apple.png")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setImage("/Assets/Fruit/apple.png");
     }
 }

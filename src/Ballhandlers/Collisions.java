@@ -17,66 +17,77 @@ public class Collisions {
     /**
      * Checks if the balls are colliding by comparing distances
      * between them and the radi
-     * @param b1
-     * @param b2
-     * @return
+     * @param b1 SuperBall object to be checked
+     * @param b2 SuperBall object to be checked against
+     * @return boolean true if objects are colliding
      */
     public static boolean checkCollision (SuperBall b1, SuperBall b2) {
         return distance(b1,b2) <= (b1.radius + b2.radius);
     }
 
+    /**
+     * Handles the collision between two balls
+     * @param b1 SuperBall object being collided with
+     * @param b2 SuperBall object to be collided
+     */
     public static void handleCollisions (SuperBall b1, SuperBall b2) {
 
+        // Correct the position of the balls if they are overlapping
         if (b2.radius > b1.radius)
-            staticCollision(b1, b2, false);
+            staticCollision(b1, b2);
         else
-            staticCollision(b2, b1, false);
-
+            staticCollision(b2, b1);
 
         int xDist = b1.x - b2.x;
         int yDist = b1.y - b2.y;
-        double distSquared = xDist*xDist + yDist*yDist;
-        //Check the squared distances instead of the the distances, same result, but avoids a square root.
-        double xVelocity = b2.vx - b1.vx;
-        double yVelocity = b2.vy - b1.vy;
-        double dotProduct = xDist * xVelocity + yDist * yVelocity;
-        //Neat vector maths, used for checking if the objects moves towards one another.
-        if (dotProduct > 0) {
-            double collisionScale = dotProduct / distSquared;
-            double xCollision = xDist * collisionScale;
-            double yCollision = yDist * collisionScale;
-            //The Collision vector is the speed difference projected on the Dist vector,
-            //thus it is the component of the speed difference needed for the collision.
+        double xVelDiff = b2.vx - b1.vx;
+        double yVelDiff = b2.vy - b1.vy;
+
+        double distSquared = xDist*xDist + yDist*yDist; // avoid square root
+        double dotProduct = xDist * xVelDiff + yDist * yVelDiff;
+
+        if (dotProduct > 0) { // check if the objects are moving towards each other
+            double colScale = dotProduct / distSquared;
+            double xCol = xDist * colScale;
+            double yCol = yDist * colScale;
             double combinedMass = b1.weight + b2.weight;
-            double collisionWeightA = 2 * b2.weight / combinedMass;
-            double collisionWeightB = 2 * b1.weight / combinedMass;
-            b1.vx += collisionWeightA * xCollision;
-            b1.vy += collisionWeightA * yCollision;
-            b2.vx -= collisionWeightB * xCollision;
-            b2.vy -= collisionWeightB * yCollision;
+            double colWeightB1 = 2 * b2.weight / combinedMass;
+            double colWeightB2 = 2 * b1.weight / combinedMass;
+
+            b1.vx += colWeightB1 * xCol;
+            b1.vy += colWeightB1 * yCol;
+            b2.vx -= colWeightB2 * xCol;
+            b2.vy -= colWeightB2 * yCol;
         }
     }
 
-    public static void staticCollision(SuperBall b1, SuperBall b2, boolean emergency) {
+    /**
+     * Finds and corrects the overlap between balls
+     * @param b1 SuperBall object that is stationary
+     * @param b2 SuperBall object that is to be corrected
+     */
+    public static void staticCollision(SuperBall b1, SuperBall b2) {
         double overlap = b1.radius + b2.radius - distance(b1, b2);
 
-        SuperBall smallerObject = b2;
-        SuperBall biggerObject = b1;
-
-        if (emergency) {
-            biggerObject = b2;
-            smallerObject = b1;
-        }
-
-        double theta = Math.atan2((biggerObject.y - smallerObject.y), (biggerObject.x - smallerObject.x));
-        smallerObject.x -= (int) round(overlap * Math.cos(theta));
-        smallerObject.y -= (int) round(overlap * Math.sin(theta));
+        double theta = Math.atan2((b1.y - b2.y), (b1.x - b2.x));
+        b2.x -= (int) round(overlap * Math.cos(theta));
+        b2.y -= (int) round(overlap * Math.sin(theta));
     }
 
+    /**
+     * Calculates the distance between two balls
+     * @param b1 SuperBall object
+     * @param b2 SuperBall object
+     * @return double distance between the balls
+     */
     public static double distance (SuperBall b1, SuperBall b2){
         return Math.sqrt(pow((b2.x+b2.radius) - (b1.x + b1.radius), 2) + pow((b2.y+b2.radius) - (b1.y + b1.radius), 2));
     }
 
+    /**
+     * Handles the collision between the ball and the walls
+     * @param b SuperBall object to check for collision
+     */
     public static void wallCollisions (SuperBall b) {
         boolean collide = false;
         if (b.x < 350) {
@@ -97,15 +108,22 @@ public class Collisions {
         if (collide) {
             for (SuperBall b2 : GamePanel.fruits) {
                 if (b2 != b && checkCollision(b, b2)) {
-                    staticCollision(b, b2, false);
+                    staticCollision(b, b2);
                     b.vx = 0;
                 }
             }
         }
     }
 
+    /**
+     * Checks if the ball is out of bounds
+     * @param b SuperBall object to check
+     */
     public static void checkLost(SuperBall b) {
-        if (b.y < 150 && b.vy <= 0 && b.isDropped) {
+        long currentTime = System.currentTimeMillis();
+        if (b.y < 150 && b.isDropped &&(currentTime - b.droppedTime) >= 1500) {
+            Main.mh.playEndSoundEffect();
+            GamePanel.fruits.clear();
             Main.gameState = 2;
         }
     }

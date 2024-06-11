@@ -16,7 +16,6 @@ import java.util.Objects;
 
 public class GamePanel {
 
-    // initialize classes
     public static GraphicsConsole gc;
     private final Spawner spawner;
     private final Bucket bucket;
@@ -30,7 +29,8 @@ public class GamePanel {
     Color buttonOutline = new Color (255, 240,201);
 
     /**
-    * Constructor
+     * Constructor
+     * Initializes default settings
      */
     public GamePanel() {
 
@@ -53,13 +53,13 @@ public class GamePanel {
         gc.setBackgroundColor(Color.decode("#eab676"));
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/GameScreen.jpg")));
-        } catch (Exception ignored) {} //background image
+        } catch (Exception ignored) {}
         sound.playDrop = true;
         gc.clear();
     }
 
     /**
-     * Starts the main game loop
+     * Starts the game
      */
     public void start() {
        while (Main.gameState == 1) {
@@ -71,11 +71,9 @@ public class GamePanel {
 
     /**
      * Updates the game
-     * Changes gamestate and clears variables if the user clicks menu or end game buttons
      */
     private void update() {
         // Change Game state
-
         if (menu.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
             fruits.clear();
             Main.gameState = 0;
@@ -86,13 +84,16 @@ public class GamePanel {
             Main.gameState = 2;
         }
 
+        // update objects
         spawner.update();
-        for (SuperBall ball : fruits) {
-            ball.update();
-            Collisions.checkLost(ball);
-        }
         mh.merge();
         sound.update();
+
+        // avoid current modification exception
+        for(int i = 0; i < fruits.size(); i++) {
+            fruits.get(i).update();
+            Collisions.checkLost(fruits.get(i));
+        }
     }
 
     /**
@@ -102,8 +103,13 @@ public class GamePanel {
         synchronized (gc) {
             gc.clear();
             gc.clearRotation();
-            gc.drawImage(image,0,0);
 
+            gc.drawImage(image,0,0);// draw background
+
+            sb.draw();
+            bucket.draw();
+
+            // Draw buttons
             gc.setColor(buttonBackground);
             gc.fillRoundRect(menu.x, menu.y, menu.width, menu.height, 30,30);
             gc.fillRoundRect(end.x, end.y, end.width, end.height, 30,30);
@@ -115,12 +121,10 @@ public class GamePanel {
             gc.setColor(Color.WHITE);
             gc.drawString("MENU", menu.x+90, menu.y+45);
             gc.drawString("END GAME", end.x+50, end.y+45);
-            sb.draw();
-            bucket.draw();
 
-            spawner.draw();
-            for (SuperBall ball : fruits) {
-                ball.draw(gc);
+            // avoid current modification exception
+            for (int i = 0; i < fruits.size(); i++) {
+                fruits.get(i).draw();
             }
         }
     }

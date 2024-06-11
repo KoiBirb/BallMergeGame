@@ -8,7 +8,7 @@ public class ScoreBoard{
     Rectangle r;
     Color transparentWhite = new Color(255, 255, 255, 40);
     public static int score = 0;
-    int[] topScores = new int[7];
+    public static int[] topScores = new int[7];
     Font font = new Font("Arial", Font.BOLD, 40);
     FontMetrics fm = GamePanel.gc.getFontMetrics(font); //centers text
 
@@ -52,12 +52,12 @@ public class ScoreBoard{
         GamePanel.gc.fillRoundRect(60, 550,230, 40,30,30);
         GamePanel.gc.setColor(Color.WHITE);
         GamePanel.gc.drawString(String.valueOf(topScores[0]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 285);
-        GamePanel.gc.drawString(String.valueOf(topScores[1]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 335);
-        GamePanel.gc.drawString(String.valueOf(topScores[2]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 385);
-        GamePanel.gc.drawString(String.valueOf(topScores[3]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 435);
-        GamePanel.gc.drawString(String.valueOf(topScores[4]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 485);
-        GamePanel.gc.drawString(String.valueOf(topScores[5]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 535);
-        GamePanel.gc.drawString(String.valueOf(topScores[6]), 175 - (fm.stringWidth(String.valueOf(topScores[0])))/2, 585);
+        GamePanel.gc.drawString(String.valueOf(topScores[1]), 175 - (fm.stringWidth(String.valueOf(topScores[1])))/2, 335);
+        GamePanel.gc.drawString(String.valueOf(topScores[2]), 175 - (fm.stringWidth(String.valueOf(topScores[2])))/2, 385);
+        GamePanel.gc.drawString(String.valueOf(topScores[3]), 175 - (fm.stringWidth(String.valueOf(topScores[3])))/2, 435);
+        GamePanel.gc.drawString(String.valueOf(topScores[4]), 175 - (fm.stringWidth(String.valueOf(topScores[4])))/2, 485);
+        GamePanel.gc.drawString(String.valueOf(topScores[5]), 175 - (fm.stringWidth(String.valueOf(topScores[5])))/2, 535);
+        GamePanel.gc.drawString(String.valueOf(topScores[6]), 175 - (fm.stringWidth(String.valueOf(topScores[6])))/2, 585);
 
     }
 

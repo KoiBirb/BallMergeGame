@@ -1,18 +1,22 @@
+/*
+ * Watermelon.java
+ * Leo Bogaert
+ * June 12, 2024
+ * Watermelon object
+ */
 package Balls;
-
-import javax.imageio.ImageIO;
-import java.util.Objects;
 
 public class Watermelon extends SuperBall {
 
     public static final int DIAMETER = 320;
 
+    /**
+     * Watermelon constructor
+     * @param x int position of the watermelon
+     * @param y int position of the watermelon
+     */
     public Watermelon(int x, int y) {
         super(x, y, DIAMETER);
-        try {
-            super.image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/Fruit/watermelon.png")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setImage("/Assets/Fruit/watermelon.png");
     }
 }

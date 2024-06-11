@@ -41,7 +41,7 @@ public class MusicHandler {
      * When loss: plays bomb sound effect
      */
     public void playEndSoundEffect(){
-        playMusic(1);
+        playSoundEffect(1);
     }
 
 

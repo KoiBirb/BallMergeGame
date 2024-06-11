@@ -1,6 +1,7 @@
 package Main;
 
 import GUI.EndScreen;
+import GUI.ScoreBoard;
 import GUI.TitleScreen;
 import Sound.MusicHandler;
 
@@ -36,6 +37,14 @@ public class Main {
                    es.start();
                    break;
            }
+
+           // Update scoreboard
+            if (ScoreBoard.score > ScoreBoard.topScores[6]) {
+                ScoreBoard.topScores[6] = ScoreBoard.score;
+            }
+            ScoreBoard.topScores = Sort.mergeSort(ScoreBoard.topScores);
+
+            ScoreBoard.score = 0;
        }
     }
 }

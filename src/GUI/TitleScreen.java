@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class TitleScreen {
 
-    //variables and class initializing
     private final int SLEEPTIME = 5;
     public static Rectangle button, help;
     BufferedImage image, image2;

@@ -44,7 +44,6 @@ public class EndScreen {
      */
     private void update() {
         mh.update();
-        //checks if the mouse is inside the rectangle
         if (button.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
             Main.gameState = 1;
         }
@@ -62,14 +61,9 @@ public class EndScreen {
     }
 
     /**
-     * Updates the scoreboard and restarts the game
+     * Runs end screen
      */
     public void start() {
-        if (ScoreBoard.score > ScoreBoard.topScores[6]) {
-            ScoreBoard.topScores[6] = ScoreBoard.score;
-        }
-        ScoreBoard.topScores = Sort.mergeSort(ScoreBoard.topScores);
-
         while (Main.gameState == 2) {
             update();
             draw();
