@@ -1,16 +1,19 @@
 package Sound;
 
 import Main.GamePanel;
-
 import static GUI.TitleScreen.gc;
 import static GUI.TitleScreen.help;
 
 public class MusicHandler {
 
+    //import necessary objects
     sound music = new sound();
     sound effect = new sound();
     public boolean playDrop = false;
 
+    /**
+     * Checks if fruit are dropped or help, plays correct sound effect from array
+     */
     public void update(){
 
         try {
@@ -27,21 +30,35 @@ public class MusicHandler {
         }
     }
 
+    /**
+    * Plays background music
+     */
     public void playBackgroundMusic(){
         playMusic(0);
     }
 
+    /**
+     * When loss: plays bomb sound effect
+     */
     public void playEndSoundEffect(){
         playMusic(1);
     }
 
 
+    /**
+     * Plays the background music on a loop
+     * @param i music file to play
+     */
     public void playMusic(int i) {
         music.setFile(i);
         music.play();
         music.loop();
     }
 
+    /**
+     * Plays specified sound effect
+     * @param i
+     */
     private void playSoundEffect(int i) {
         effect.setFile(i);
         effect.play();

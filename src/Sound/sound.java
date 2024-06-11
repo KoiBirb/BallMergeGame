@@ -10,6 +10,9 @@ public class sound {
     Clip clip;
     URL soundArray[] = new URL[5];
 
+    /**
+     * Creates an array that stores all the sound effects
+     */
     public sound() {
 
         soundArray[0] = getClass().getResource("/sound/backgroundMusic.wav");
@@ -18,6 +21,11 @@ public class sound {
         soundArray[3] = getClass().getResource("/sound/chimeUp.wav");
         soundArray[4] = getClass().getResource("/sound/mergeSound.wav");
     }
+
+    /**
+     * Sets song file path
+     * @param i integer value of song file path in array
+     */
     public void setFile(int i){
 
         try{
@@ -28,16 +36,19 @@ public class sound {
 
         }
     }
+
+    /**
+     * Starts playing
+     */
     public void play(){
         clip.start();
     }
 
+    /**
+     * Loops the background music
+     */
     public void loop(){
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-    }
-    public void stop(){
-
-        clip.stop();
     }
 }

@@ -29,7 +29,9 @@ public class GamePanel {
     Color buttonBackground = new Color(248, 229, 187, 98);
     Color buttonOutline = new Color (255, 240,201);
 
-    // set default settings
+    /**
+    * Constructor
+     */
     public GamePanel() {
 
         gc = new GraphicsConsole(1200, 650);
@@ -51,13 +53,13 @@ public class GamePanel {
         gc.setBackgroundColor(Color.decode("#eab676"));
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/GameScreen.jpg")));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {} //background image
         sound.playDrop = true;
         gc.clear();
     }
 
     /**
-     * Starts the game
+     * Starts the main game loop
      */
     public void start() {
        while (Main.gameState == 1) {
@@ -69,6 +71,7 @@ public class GamePanel {
 
     /**
      * Updates the game
+     * Changes gamestate and clears variables if the user clicks menu or end game buttons
      */
     private void update() {
         // Change Game state
@@ -84,7 +87,6 @@ public class GamePanel {
         }
 
         spawner.update();
-        bucket.update();
         for (SuperBall ball : fruits) {
             ball.update();
             Collisions.checkLost(ball);

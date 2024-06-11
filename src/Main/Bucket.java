@@ -4,7 +4,6 @@ import java.awt.*;
 public class Bucket {
 
     Rectangle r;
-
     Color bucketBackground = new Color(248, 229, 187, 95);
     Color bucketOutline = new Color (255, 240,201);
 
@@ -12,10 +11,9 @@ public class Bucket {
         r = new Rectangle(350, 150, 500, 500);
     }
 
-    public void update(){
-
-    }
-
+    /**
+    * Draws the bucket
+     */
     public void draw() {
 
         GamePanel.gc.setColor(bucketBackground);

@@ -17,18 +17,20 @@ public class EndScreen {
     public static MusicHandler mh = new MusicHandler();
 
 
-    // set default settings
+    /**
+     * Constructor
+     */
     public EndScreen() {
         gc.setAntiAlias(true);
         gc.setLocationRelativeTo(null);
         gc.enableMouseMotion();
         gc.enableMouse();
         gc.setTitle("YOU LOSE");
-        gc.setBackgroundColor(Color.decode("#eab676")); //incase the image doesnt work
+        gc.setBackgroundColor(Color.decode("#eab676")); //in case the image doesn't work
 
         button = new Rectangle(454, 480, 301, 63); //button to get into the game
 
-        try { //import image title screen
+        try { //import image end screen
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/EndScreen.jpg")));
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,7 +40,7 @@ public class EndScreen {
     }
 
     /**
-     * Updates
+     * Updates sound. If the play again button is clicked, changes gamestate
      */
     private void update() {
         mh.update();
@@ -48,17 +50,20 @@ public class EndScreen {
         }
     }
 
-    //draw
+    /**
+     * draws background
+     */
     void draw() {
         synchronized (gc) {
             gc.clear();
             gc.clearRotation();
-            gc.setColor(Color.RED);
             gc.drawImage(image, 0, 0);
-           //gc.drawRect(button.x, button.y, 301, 63);
         }
     }
 
+    /**
+     * Updates the scoreboard and restarts the game
+     */
     public void start() {
         if (ScoreBoard.score > ScoreBoard.topScores[6]) {
             ScoreBoard.topScores[6] = ScoreBoard.score;

@@ -2,7 +2,6 @@ package GUI;
 import Main.Main;
 import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
-import Main.GamePanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -45,7 +44,7 @@ public class TitleScreen {
     }
 
     /**
-     * Starts
+     * Starts titlescreen
      */
     public void start() {
         while (Main.gameState == 0) {
@@ -59,10 +58,10 @@ public class TitleScreen {
 
     /**
      * Updates
+     * checks if the button is clicked, if so it begins the main game
      */
     private void update() {
         mh.update();
-        //checks if the mouse is inside the rectangle
         if (button.contains(gc.getMouseX(), gc.getMouseY())&&gc.getMouseClick() > 0) {
             gc.setVisible(false);
             Main.gameState = 1;
@@ -71,18 +70,18 @@ public class TitleScreen {
 
         /**
          * Draws
+         * display title screen, if user hovers over help display help screen
          */
         void draw () {
             synchronized (gc) {
                 gc.clear();
                 gc.clearRotation();
-
                 gc.drawImage(image,0,0);
 
-                if (help.contains(gc.getMouseX(), gc.getMouseY())) {    //check if mouse hovers over help
+                if (help.contains(gc.getMouseX(), gc.getMouseY())) {
                     gc.setColor(Color.WHITE);
                     mh.update();
-                    gc.drawImage(image2,0,0); //display help
+                    gc.drawImage(image2,0,0);
 
                 }
 
