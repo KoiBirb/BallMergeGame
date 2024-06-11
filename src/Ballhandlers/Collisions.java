@@ -20,11 +20,11 @@ public class Collisions {
 
     public static void handleCollisions (SuperBall b1, SuperBall b2) {
 
-        if (b2.radius > b1.radius)
-            staticCollision(b1, b2, false);
-        else
-            staticCollision(b2, b1, false);
-
+//        if (b2.radius > b1.radius)
+//            staticCollision(b1, b2, false);
+//        else
+//            staticCollision(b2, b1, false);
+//
 
         int xDist = b1.x - b2.x;
         int yDist = b1.y - b2.y;
@@ -98,7 +98,7 @@ public class Collisions {
     }
 
     public static void checkLost(SuperBall b) {
-        if (b.y < 150 && b.vx <= 0) {
+        if (b.y < 150 && b.vy <= 0 && b.isDropped) {
             Main.gameState = 2;
         }
     }

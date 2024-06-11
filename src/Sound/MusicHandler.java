@@ -11,10 +11,6 @@ public class MusicHandler {
     sound effect = new sound();
     public boolean playMerge = false;
 
-    public MusicHandler(){
-        playMusic(0);
-    }
-
     public void update(){
 
         try {
@@ -36,7 +32,7 @@ public class MusicHandler {
     }
 
 
-    private void playMusic(int i) {
+    public void playMusic(int i) {
         music.setFile(i);
         music.play();
         music.loop();

@@ -1,5 +1,6 @@
 package Main;
 
+import Ballhandlers.Collisions;
 import Ballhandlers.MergerHandler;
 import Ballhandlers.Spawner;
 import Balls.*;
@@ -71,10 +72,12 @@ public class GamePanel {
         // Change Game state
 
         if (menu.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
+            fruits.clear();
             Main.gameState = 0;
         }
 
         if (end.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
+            fruits.clear();
             Main.gameState = 2;
         }
 
@@ -82,6 +85,7 @@ public class GamePanel {
         bucket.update();
         for (SuperBall ball : fruits) {
             ball.update();
+            Collisions.checkLost(ball);
         }
         mh.merge();
         sound.update();
