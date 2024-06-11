@@ -1,10 +1,7 @@
 package GUI;
 import java.awt.*;
 import java.awt.FontMetrics;
-
-import Ballhandlers.Collisions;
 import Main.GamePanel;
-import Main.Sort;
 
 public class ScoreBoard{
 
@@ -26,18 +23,21 @@ public class ScoreBoard{
      */
 
     public void draw() {
+        //score board
         GamePanel.gc.setColor(new Color(248, 229, 187, 95));
         GamePanel.gc.fillRoundRect(r.x, r.y, r.width, r.height,30,30);
         GamePanel.gc.setStroke(5);
         GamePanel.gc.setColor(new Color(255, 240,201));
         GamePanel.gc.drawRoundRect(r.x, r.y, r.width, r.height,30,30);
         GamePanel.gc.setColor(Color.white);
+        //score bubble
         GamePanel.gc.drawOval(100, 40, 150, 150);
         GamePanel.gc.setColor(transparentWhite);
         GamePanel.gc.fillOval(100, 40, 150, 150);
         GamePanel.gc.setColor(Color.white);
         GamePanel.gc.setFont (font);
         GamePanel.gc.drawString(String.valueOf(score), 175 - (fm.stringWidth(String.valueOf(score)))/2, 130);
+        // more score board
         GamePanel.gc.drawString("TOP SCORES", 55, 240);
         GamePanel.gc.setColor(new Color(250, 194, 61, 255));
         GamePanel.gc.fillRoundRect(60, 250,230, 40,30,30);
