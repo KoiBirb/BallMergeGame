@@ -52,7 +52,7 @@ public class GamePanel {
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/GameScreen.jpg")));
         } catch (Exception ignored) {}
-        sound.playMerge = true;
+        sound.playDrop = true;
         gc.clear();
     }
 
