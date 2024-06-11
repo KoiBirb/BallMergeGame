@@ -1,3 +1,10 @@
+/**
+ * EndScreen.java
+ * Mariana Trillos
+ * June 12, 2024
+ * Draws end screen
+ */
+
 package GUI;
 import Main.Main;
 import Sound.MusicHandler;

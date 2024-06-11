@@ -1,3 +1,9 @@
+/**
+ * Sound.java
+ * Leo Bogaert
+ * June 12, 2024
+ * Creates sound object
+ */
 package Sound;
 
 import javax.sound.sampled.AudioInputStream;
