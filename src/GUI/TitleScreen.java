@@ -1,3 +1,10 @@
+/**
+ * TitleScreen.java
+ * Mariana Trillos
+ * June 12, 2024
+ * Displays Title screen and uses buttons to exit
+ */
+
 package GUI;
 import Main.Main;
 import Sound.MusicHandler;

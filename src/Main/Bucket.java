@@ -1,3 +1,10 @@
+/**
+ * Bucket.java
+ * Mariana Trillos
+ * June 12, 2024
+ * Draws game bucket
+ */
+
 package Main;
 import java.awt.*;
 

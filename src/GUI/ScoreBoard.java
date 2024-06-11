@@ -12,16 +12,17 @@ public class ScoreBoard{
     Font font = new Font("Arial", Font.BOLD, 40);
     FontMetrics fm = GamePanel.gc.getFontMetrics(font); //centers text
 
-    //constructor
+    /**
+     * constructor
+     */
     public ScoreBoard() {
         super();
         r = new Rectangle(25, 200, 300,400);
     }
 
-    /*
-     * Draws graphics
+    /**
+     * Draws scoreboard and displays scores
      */
-
     public void draw() {
         //score board
         GamePanel.gc.setColor(new Color(248, 229, 187, 95));

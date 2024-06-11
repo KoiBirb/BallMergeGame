@@ -1,5 +1,10 @@
+/**
+ * MusicHandler.java
+ * Mariana Trillos
+ * June 12, 2024
+ * Dictates when to play each sound
+ */
 package Sound;
-
 import Main.GamePanel;
 import static GUI.TitleScreen.gc;
 import static GUI.TitleScreen.help;

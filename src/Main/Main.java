@@ -17,13 +17,13 @@ public class Main {
 
         mh.playBackgroundMusic();
 
-        while (true) {
+        while (true) { //main game loop
 
            TitleScreen.gc.setVisible(false);
            GamePanel.gc.setVisible(false);
            EndScreen.gc.setVisible(false);
 
-           switch (gameState) {
+           switch (gameState) { //makes it easy to navigate between menu, game, end
                case 0:
                    TitleScreen.gc.setVisible(true);
                    ts.start();
