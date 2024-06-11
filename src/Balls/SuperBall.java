@@ -34,7 +34,7 @@ public class SuperBall {
         this.y = y;
         this.diameter = diameter;
         this.radius = diameter / 2;
-        this.weight = diameter;
+        this.weight = diameter/10;
         this.isDropped = false;
     }
 

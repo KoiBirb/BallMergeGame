@@ -38,8 +38,8 @@ public class Collisions {
         else
             staticCollision(b2, b1);
 
-        int xDist = b1.x - b2.x;
-        int yDist = b1.y - b2.y;
+        int xDist = (b1.x + b1.radius) - (b2.x + b2.radius);
+        int yDist = (b1.y + b1.radius) - (b2.y + b2.radius);
         double xVelDiff = b2.vx - b1.vx;
         double yVelDiff = b2.vy - b1.vy;
 
@@ -69,7 +69,7 @@ public class Collisions {
     public static void staticCollision(SuperBall b1, SuperBall b2) {
         double overlap = b1.radius + b2.radius - distance(b1, b2);
 
-        double theta = Math.atan2((b1.y - b2.y), (b1.x - b2.x));
+        double theta = Math.atan2(((b1.y + b1.radius) - (b2.y + b2.radius)), ((b1.x + b1.radius) - (b2.x + b2.radius)));
         b2.x -= (int) round(overlap * Math.cos(theta));
         b2.y -= (int) round(overlap * Math.sin(theta));
     }

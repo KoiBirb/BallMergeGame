@@ -18,13 +18,16 @@ public class MergerHandler {
      */
     public void merge() {
         for (int i = 0; i < GamePanel.fruits.size(); i++) {
-            if (GamePanel.fruits.get(i).isDropped) {
+            SuperBall b1 = GamePanel.fruits.get(i);
+            if (b1.isDropped) {
+                
                 for (int j = i + 1; j < GamePanel.fruits.size(); j++) {
-                    if (GamePanel.fruits.get(j).isDropped) {
+                    SuperBall b2 = GamePanel.fruits.get(j);
+                    if (b2.isDropped) {
 
-                        if (Collisions.checkCollision(GamePanel.fruits.get(i), GamePanel.fruits.get(j))) {
-                            Collisions.handleCollisions(GamePanel.fruits.get(i), GamePanel.fruits.get(j));
-                            if (GamePanel.fruits.get(i).radius == GamePanel.fruits.get(j).radius) {
+                        if (Collisions.checkCollision(b1, b2)) {
+                            Collisions.handleCollisions(b1, b2);
+                            if (b1.radius == b2.radius) {
                                 GamePanel.fruits.set(i, findNextBall((GamePanel.fruits.get(i).x + GamePanel.fruits.get(j).x + GamePanel.fruits.get(j).diameter) / 2,
                                         GamePanel.fruits.get(i).y, GamePanel.fruits.get(i).diameter));
                                 GamePanel.fruits.get(i).isDropped = true;
