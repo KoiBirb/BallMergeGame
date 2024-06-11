@@ -10,7 +10,7 @@ public class ScoreBoard{
     public static int score = 0;
     int[] topScores = new int[7];
     Font font = new Font("Arial", Font.BOLD, 40);
-    FontMetrics fm = GamePanel.gc.getFontMetrics(font);
+    FontMetrics fm = GamePanel.gc.getFontMetrics(font); //centers text
 
     //constructor
     public ScoreBoard() {
