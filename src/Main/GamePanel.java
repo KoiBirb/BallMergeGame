@@ -37,9 +37,10 @@ public class GamePanel {
         mh = new MergerHandler();
         fruits = new ArrayList<>();
         sound = TitleScreen.mh;
+        Font font = new Font("Arial", Font.BOLD, 40);
 
-        menu = new Rectangle(454, 425, 301, 63);
-        end = new Rectangle(600, 425, 301, 63);
+        menu = new Rectangle(875, 275, 301, 63);
+        end = new Rectangle(875, 415, 301, 63);
 
         gc.setAntiAlias(true);
         gc.setLocationRelativeTo(null);
@@ -99,8 +100,12 @@ public class GamePanel {
             gc.clear();
             gc.clearRotation();
             gc.drawImage(image,0,0);
-            gc.drawRect(menu.x, menu.y, menu.width, menu.height);
-            gc.drawRect(end.x, end.y, end.width, end.height);
+            gc.fillRoundRect(menu.x, menu.y, menu.width, menu.height, 30,30);
+            gc.fillRoundRect(end.x, end.y, end.width, end.height, 30,30);
+
+            gc.setColor(Color.BLACK);
+            gc.drawString("Menu", menu.x+90, menu.y+45);
+            gc.drawString("End Game", end.x+50, end.y+45);
             sb.draw();
             bucket.draw();
 

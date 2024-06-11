@@ -27,7 +27,7 @@ public class EndScreen {
         gc.setTitle("YOU LOSE");
         gc.setBackgroundColor(Color.decode("#eab676")); //incase the image doesnt work
 
-        button = new Rectangle(454, 425, 301, 63); //button to get into the game
+        button = new Rectangle(454, 480, 301, 63); //button to get into the game
 
         try { //import image title screen
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/EndScreen.jpg")));
@@ -56,7 +56,7 @@ public class EndScreen {
             gc.clearRotation();
             gc.setColor(Color.RED);
             gc.drawImage(image, 0, 0);
-            gc.drawRect(454, 425, 301, 63);
+            gc.drawRect(button.x, button.y, 301, 63);
         }
     }
 
