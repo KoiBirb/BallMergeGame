@@ -5,17 +5,18 @@ import Main.GamePanel;
 
 public class ScoreBoard{
 
-    Rectangle r;
-    Color transparentWhite = new Color(255, 255, 255, 40);
-    public static int score = 0;
+    private final Rectangle r;
+    private final Color transparentWhite = new Color(255, 255, 255, 40);
+    public static int score;
     public static int[] topScores = new int[7];
-    Font font = new Font("Arial", Font.BOLD, 40);
-    FontMetrics fm = GamePanel.gc.getFontMetrics(font); //centers text
+    private final Font font = new Font("Arial", Font.BOLD, 40);
+    private final FontMetrics fm = GamePanel.gc.getFontMetrics(font); //used to center text
 
     /**
      * constructor
      */
     public ScoreBoard() {
+        score = 0;
         r = new Rectangle(25, 200, 300,400);
     }
 
@@ -58,8 +59,6 @@ public class ScoreBoard{
         GamePanel.gc.drawString(String.valueOf(topScores[4]), 175 - (fm.stringWidth(String.valueOf(topScores[4])))/2, 485);
         GamePanel.gc.drawString(String.valueOf(topScores[5]), 175 - (fm.stringWidth(String.valueOf(topScores[5])))/2, 535);
         GamePanel.gc.drawString(String.valueOf(topScores[6]), 175 - (fm.stringWidth(String.valueOf(topScores[6])))/2, 585);
-
     }
-
 }
 

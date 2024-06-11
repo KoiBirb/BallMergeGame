@@ -14,13 +14,12 @@ import java.net.URL;
 public class sound {
 
     Clip clip;
-    URL soundArray[] = new URL[5];
+    URL[] soundArray = new URL[5];
 
     /**
      * Creates an array that stores all the sound effects
      */
     public sound() {
-
         soundArray[0] = getClass().getResource("/sound/backgroundMusic.wav");
         soundArray[1] = getClass().getResource("/sound/BombSound.wav");
         soundArray[2] = getClass().getResource("/sound/chimeDown.wav");
@@ -33,7 +32,6 @@ public class sound {
      * @param i integer value of song file path in array
      */
     public void setFile(int i){
-
         try{
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundArray[i]);
             clip = AudioSystem.getClip();
@@ -51,7 +49,7 @@ public class sound {
     }
 
     /**
-     * Loops the background music
+     * Loops the current music file
      */
     public void loop(){
         clip.loop(Clip.LOOP_CONTINUOUSLY);

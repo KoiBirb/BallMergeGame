@@ -8,6 +8,7 @@ import Sound.MusicHandler;
 public class Main {
 
     public static int gameState = 0;
+    public final static int SLEEPTIME = 5;
     public static MusicHandler mh = new MusicHandler();
     public static TitleScreen ts = new TitleScreen();
     public static GamePanel gp = new GamePanel();
@@ -18,7 +19,6 @@ public class Main {
         mh.playBackgroundMusic();
 
         while (true) { //main game loop
-
            TitleScreen.gc.setVisible(false);
            GamePanel.gc.setVisible(false);
            EndScreen.gc.setVisible(false);

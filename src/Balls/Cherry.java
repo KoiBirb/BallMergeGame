@@ -6,9 +6,6 @@
  */
 package Balls;
 
-import javax.imageio.ImageIO;
-import java.util.Objects;
-
 public class Cherry extends SuperBall {
 
     public static final int DIAMETER = 40;

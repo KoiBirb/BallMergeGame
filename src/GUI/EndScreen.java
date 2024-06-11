@@ -9,51 +9,55 @@ package GUI;
 import Main.Main;
 import Sound.MusicHandler;
 import hsa2.GraphicsConsole;
-import Main.Sort;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 public class EndScreen {
-    //variables and class initializing
-    private final int SLEEPTIME = 5;
-    public static Rectangle button;
-    BufferedImage image;
+
+    private final Rectangle button;
+    private BufferedImage image;
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
-    public static MusicHandler mh = new MusicHandler();
+    private static final MusicHandler mh = new MusicHandler();
 
 
     /**
      * Constructor
      */
     public EndScreen() {
-        gc.setAntiAlias(true);
-        gc.setLocationRelativeTo(null);
-        gc.enableMouseMotion();
-        gc.enableMouse();
-        gc.setTitle("YOU LOSE");
-        gc.setBackgroundColor(Color.decode("#eab676")); //in case the image doesn't work
+        setUp();
 
         button = new Rectangle(454, 480, 301, 63); //button to get into the game
 
         try { //import image end screen
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/EndScreen.jpg")));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Image failed to Load");
         }
-
         gc.clear();
     }
 
     /**
-     * Updates sound. If the play again button is clicked, changes gamestate
+     * Sets graphics console settings
+     */
+    private void setUp(){
+        gc.setAntiAlias(true);
+        gc.setLocationRelativeTo(null);
+        gc.enableMouseMotion();
+        gc.enableMouse();
+        gc.setTitle("YOU LOSE");
+        gc.setBackgroundColor(Color.decode("#eab676"));
+    }
+
+
+    /**
+     * Updates sound. If the play again button is clicked, changes game state
      */
     private void update() {
         mh.update();
-        if (button.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0) {
+        if (button.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0)
             Main.gameState = 1;
-        }
     }
 
     /**
@@ -74,7 +78,7 @@ public class EndScreen {
         while (Main.gameState == 2) {
             update();
             draw();
-            gc.sleep(SLEEPTIME);
+            gc.sleep(Main.SLEEPTIME);
         }
     }
 }

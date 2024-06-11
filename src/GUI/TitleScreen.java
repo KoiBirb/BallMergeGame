@@ -16,31 +16,29 @@ import java.util.Objects;
 
 public class TitleScreen {
 
-    private final int SLEEPTIME = 5;
-    public static Rectangle button, help;
-    BufferedImage image, image2;
+    private final Rectangle button, help;
+    private BufferedImage image, image2;
     public static final GraphicsConsole gc = new GraphicsConsole(1200, 650);
-    public static MusicHandler mh = new MusicHandler();
+    private final MusicHandler mh;
 
-    // set default settings
+    /**
+     * Constructor
+     */
     public TitleScreen() {
-        gc.setAntiAlias(true);
-        gc.setLocationRelativeTo(null);
-        gc.enableMouseMotion();
-        gc.enableMouse();
-        gc.setTitle("SUIKA GAME");
-        gc.setBackgroundColor(Color.decode("#eab676"));
+        mh = Main.mh;
 
-        try { //import image title screen
+        setUp();
+
+        try { //Title screen
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/TitleScreen.jpg")));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Image Failed to Load");
         }
 
-        try { //import image title screen + info
+        try { //Info
             image2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Assets/GUI/TitleScreenInfo.jpg")));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Image Failed to Load");
         }
 
         button = new Rectangle(454, 425, 301, 63); //button to get into the game
@@ -50,33 +48,45 @@ public class TitleScreen {
     }
 
     /**
-     * Starts titlescreen
+     * Sets graphics console settings
+     */
+    private void setUp(){
+        gc.setAntiAlias(true);
+        gc.setLocationRelativeTo(null);
+        gc.enableMouseMotion();
+        gc.enableMouse();
+        gc.setTitle("SUIKA GAME");
+        gc.setBackgroundColor(Color.decode("#eab676"));
+    }
+
+    /**
+     * Starts title screen
      */
     public void start() {
         while (Main.gameState == 0) {
             update();
             draw();
-            gc.sleep(SLEEPTIME);
+            gc.sleep(Main.SLEEPTIME);
         }
-
-       // return true;
     }
 
     /**
-     * Updates
-     * checks if the button is clicked, if so it begins the main game
+     * Updates music and checks for button click
      */
     private void update() {
-        mh.update();
-        if (button.contains(gc.getMouseX(), gc.getMouseY())&&gc.getMouseClick() > 0) {
-            gc.setVisible(false);
+        if (button.contains(gc.getMouseX(), gc.getMouseY()) && gc.getMouseClick() > 0)
             Main.gameState = 1;
+
+        if (help.contains(gc.getMouseX(), gc.getMouseY())){
+            mh.playHelpSoundEffect(true);
+            if(!help.contains(gc.getMouseX(), gc.getMouseY())){
+                mh.playHelpSoundEffect(false);
+            }
         }
     }
 
         /**
-         * Draws
-         * display title screen, if user hovers over help display help screen
+         * Draws title screen and help screen
          */
         void draw () {
             synchronized (gc) {
@@ -86,11 +96,8 @@ public class TitleScreen {
 
                 if (help.contains(gc.getMouseX(), gc.getMouseY())) {
                     gc.setColor(Color.WHITE);
-                    mh.update();
                     gc.drawImage(image2,0,0);
-
                 }
-
             }
         }
     }

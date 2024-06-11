@@ -15,9 +15,9 @@ import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 public class SuperBall {
-    public BufferedImage image;
+    private BufferedImage image;
     public int x,y, diameter, radius;
-    public double vx, vy = 1, weight;
+    public double vx, vy, weight;
     public boolean isDropped;
 
     private final long lastTime = System.currentTimeMillis(); // Time object was created
@@ -34,7 +34,7 @@ public class SuperBall {
         this.y = y;
         this.diameter = diameter;
         this.radius = diameter / 2;
-        this.weight = diameter/10;
+        this.weight = diameter/10.0;
         this.isDropped = false;
     }
 
@@ -82,7 +82,7 @@ public class SuperBall {
      * Sets the image of the ball
      * @param imagePath String path to the image
      */
-    public void setImage(String imagePath) {
+    protected void setImage(String imagePath) {
         try {
             this.image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
         } catch (Exception e) {

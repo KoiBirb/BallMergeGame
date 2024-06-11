@@ -6,8 +6,6 @@
  */
 package Sound;
 import Main.GamePanel;
-import static GUI.TitleScreen.gc;
-import static GUI.TitleScreen.help;
 
 public class MusicHandler {
 
@@ -25,13 +23,6 @@ public class MusicHandler {
                 playSoundEffect(4);
             }
         } catch (IndexOutOfBoundsException ignored){}
-
-        if (help.contains(gc.getMouseX(), gc.getMouseY())){
-            playSoundEffect(3);
-            if(!help.contains(gc.getMouseX(), gc.getMouseY())){
-                playSoundEffect(2);
-            }
-        }
     }
 
     /**
@@ -42,12 +33,16 @@ public class MusicHandler {
     }
 
     /**
-     * When loss: plays bomb sound effect
+     * Plays bomb sound effect
      */
     public void playEndSoundEffect(){
         playSoundEffect(1);
     }
 
+    public void playHelpSoundEffect(boolean up){
+        if (up) playSoundEffect(3);
+        else playSoundEffect(2);
+    }
 
     /**
      * Plays the background music on a loop
@@ -61,7 +56,7 @@ public class MusicHandler {
 
     /**
      * Plays specified sound effect
-     * @param i
+     * @param i int number of file path
      */
     private void playSoundEffect(int i) {
         effect.setFile(i);

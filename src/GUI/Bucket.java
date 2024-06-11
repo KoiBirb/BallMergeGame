@@ -5,7 +5,9 @@
  * Draws game bucket
  */
 
-package Main;
+package GUI;
+import Main.GamePanel;
+
 import java.awt.*;
 
 public class Bucket {

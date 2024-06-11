@@ -30,7 +30,7 @@ public class Spawner {
     /**
      * Spawns a random new fruit
      */
-    public void spawnBall() {
+    private void spawnBall() {
         int randNum = random.nextInt(5) + 1;
         switch (randNum) {
             case 1:
