@@ -60,7 +60,7 @@ public class MergerHandler {
             case Strawberry.DIAMETER:
                 x = x - Grape.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Grape.DIAMETER > 850) ? 850 - Grape.DIAMETER : x;
-                ScoreBoard.score += 3;
+                ScoreBoard.score += 30;
                 return new Grape(x, y);
             case Grape.DIAMETER:
                 x = x - Lemon.DIAMETER/2;
