@@ -8,10 +8,14 @@ package Ballhandlers;
 
 import Balls.*;
 import Main.GamePanel;
+
+import java.awt.*;
 import java.util.Random;
 
 public class Spawner {
     private final Random random = new Random();
+    private final Color transparentWhite = new Color(255, 255, 255, 40);
+    private int futureBall = 1;
 
     /**
      * Updates the spawner and checks if a new ball needs to be spawned
@@ -28,11 +32,35 @@ public class Spawner {
     }
 
     /**
+     * Draws next fruit based on the previous ball
+     */
+    public void draw(){
+        SuperBall fruit;
+
+        GamePanel.gc.drawOval(950, 40, 150, 150);
+        GamePanel.gc.setColor(transparentWhite);
+        GamePanel.gc.fillOval(950, 40, 150, 150);
+        GamePanel.gc.setColor(Color.white);
+
+        fruit = switch (futureBall) {
+            case 2 -> new Strawberry(1025 - Strawberry.DIAMETER/2, 115 - Strawberry.DIAMETER/2);
+            case 3 -> new Grape(1025 - Grape.DIAMETER/2, 115 - Grape.DIAMETER/2);
+            case 4 -> new Lemon(1025 - Lemon.DIAMETER/2, 115 - Lemon.DIAMETER/2);
+            case 5 -> new Orange(1025 - Orange.DIAMETER/2, 115 - Orange.DIAMETER/2);
+            default -> new Cherry(1025 - Cherry.DIAMETER/2, 115 - Cherry.DIAMETER/2);
+        };
+        fruit.draw();
+    }
+
+    /**
      * Spawns a random new fruit
      */
     private void spawnBall() {
-        int randNum = random.nextInt(5) + 1;
-        switch (randNum) {
+
+        int currentBall = futureBall;
+        futureBall = random.nextInt(5) + 1;
+
+        switch (currentBall) {
             case 1:
                 GamePanel.fruits.add(new Cherry(GamePanel.gc.getMouseX(), 150 - Cherry.DIAMETER));
                 break;

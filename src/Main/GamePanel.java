@@ -111,6 +111,7 @@ public class GamePanel {
 
             sb.draw();
             bucket.draw();
+            spawner.draw();
 
             // Draw buttons
             gc.setColor(buttonBackground);
