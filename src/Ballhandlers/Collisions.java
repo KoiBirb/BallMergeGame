@@ -10,6 +10,9 @@ import Balls.SuperBall;
 import Main.GamePanel;
 import Main.Main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static java.lang.Math.*;
 
 public class Collisions {

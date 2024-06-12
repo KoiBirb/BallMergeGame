@@ -8,7 +8,7 @@ package Balls;
 
 public class Pear extends SuperBall{
 
-    public static final int DIAMETER = 240;
+    public static final int DIAMETER = 220;
 
     /**
      * Pear constructor
