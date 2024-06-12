@@ -55,7 +55,7 @@ public class MergerHandler {
                 // finding middle position to place ball
                 x = x - Strawberry.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Strawberry.DIAMETER > 850) ? 850 - Strawberry.DIAMETER : x;
-                ScoreBoard.score += 1;
+                ScoreBoard.score += 10;
                 return new Strawberry(x, y);
             case Strawberry.DIAMETER:
                 x = x - Grape.DIAMETER/2;
@@ -65,32 +65,32 @@ public class MergerHandler {
             case Grape.DIAMETER:
                 x = x - Lemon.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Lemon.DIAMETER > 850) ? 850 - Lemon.DIAMETER : x;
-                ScoreBoard.score += 6;
+                ScoreBoard.score += 60;
                 return new Lemon(x, y);
             case Lemon.DIAMETER:
                 x = x - Orange.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Orange.DIAMETER > 850) ? 850 - Orange.DIAMETER : x;
-                ScoreBoard.score += 10;
+                ScoreBoard.score += 100;
                 return new Orange(x, y);
             case Orange.DIAMETER:
                 x = x - Apple.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Apple.DIAMETER > 850) ? 850 - Apple.DIAMETER : x;
-                ScoreBoard.score += 15;
+                ScoreBoard.score += 150;
                 return new Apple(x, y);
             case Apple.DIAMETER:
                 x = x - Pear.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Pear.DIAMETER > 850) ? 850 - Pear.DIAMETER : x;
-                ScoreBoard.score += 21;
+                ScoreBoard.score += 210;
                 return new Pear(x, y);
             case Pear.DIAMETER:
                 x = x - Watermelon.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Watermelon.DIAMETER > 850) ? 850 - Watermelon.DIAMETER : x;
-                ScoreBoard.score += 30;
+                ScoreBoard.score += 300;
                 return new Watermelon(x, y);
             case Watermelon.DIAMETER:
                 x = x - Cherry.DIAMETER/2;
                 x = (x < 350) ? 350 : (x + Cherry.DIAMETER > 850) ? 850 - Cherry.DIAMETER : x;
-                ScoreBoard.score += 60;
+                ScoreBoard.score += 600;
                 return new Cherry(x, y);
         }
         return null;
